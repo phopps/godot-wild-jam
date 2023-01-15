@@ -14,6 +14,7 @@ public class GameManager : Node
 	// public static GameManager Instance;
 
 	public Vector2 selectedTile;
+	public Vector2 playerPosition;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
