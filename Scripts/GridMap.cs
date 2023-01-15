@@ -16,27 +16,26 @@ public class GridMap : TileMap
 	GameManager game;
 
 	[Export]
+	public Vector2 cellSize;
+	public Vector2 cellHalf;
+	[Export]
 	public Vector2 size;
 
 	public Vector2 cellSelected;
 	public Vector2 cellPosition;
-	
-	// size of cell pixels
+
 	[Export]
-	public Vector2 cellSize;
-	
+	public int visionRangeX;
 	[Export]
-	public Vector2 cellHalf;
+	public int visionRangeY;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		cells = GetUsedCells();
-		cellSize = new Vector2(32, 16);
 		cellHalf = cellSize / 2;
 
 		game = (GameManager)GetNode("/root/Main/Manager");
-		// cellSize = TileMap.CellSize;
 
 		int k = 0;
 		foreach (var c in cells)
@@ -49,11 +48,6 @@ public class GridMap : TileMap
 			tileDictionary.Add(k, cellData);
 			k++;
 		}
-
-		// GD.Print(tileDictionary);
-
-
-
 	}
 
 	/*
@@ -108,19 +102,19 @@ public class GridMap : TileMap
 
 		for (int i = 0; i < tileDictionary.Count; i++)
 		{
-			if (tileDictionary[i].x > refPosition.x + 5)
+			if (tileDictionary[i].x > refPosition.x + visionRangeX)
 			{
 				SetCellv(tileDictionary[i], -1);
 			}
-			if (tileDictionary[i].x < refPosition.x - 5)
+			if (tileDictionary[i].x < refPosition.x - visionRangeX)
 			{
 				SetCellv(tileDictionary[i], -1);
 			}
-			if (tileDictionary[i].y > refPosition.y + 5)
+			if (tileDictionary[i].y > refPosition.y + visionRangeY)
 			{
 				SetCellv(tileDictionary[i], -1);
 			}
-			if (tileDictionary[i].y < refPosition.y - 5)
+			if (tileDictionary[i].y < refPosition.y - visionRangeY)
 			{
 				SetCellv(tileDictionary[i], -1);
 			}
