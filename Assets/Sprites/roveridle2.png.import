@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/roveridle.png-f4fcde42d4e47df4bfd9d29358d87236.stex"
+path="res://.import/roveridle2.png-e072d9e745075c1e638d4e89135caa69.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/roveridle.png"
-dest_files=[ "res://.import/roveridle.png-f4fcde42d4e47df4bfd9d29358d87236.stex" ]
+source_file="res://Assets/Sprites/roveridle2.png"
+dest_files=[ "res://.import/roveridle2.png-e072d9e745075c1e638d4e89135caa69.stex" ]
 
 [params]
 

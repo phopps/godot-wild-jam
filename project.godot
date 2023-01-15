@@ -11,7 +11,13 @@ config_version=4
 [application]
 
 config/name="Godot-wild-jam"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Manager="res://Manager.tscn"
+GameManager="res://GameManager.cs"
 
 [gui]
 
