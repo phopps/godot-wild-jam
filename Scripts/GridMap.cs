@@ -12,7 +12,7 @@ public class GridMap : TileMap
 	*/
 
 	public Godot.Collections.Array cells;
-	public Godot.Collections.Dictionary<int, Vector2> tileDictionary = new Godot.Collections.Dictionary<int, Vector2>();
+	public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
 	GameManager game;
 
 	[Export]
@@ -34,19 +34,17 @@ public class GridMap : TileMap
 	{
 		cells = GetUsedCells();
 		cellHalf = cellSize / 2;
-
 		game = (GameManager)GetNode("/root/Main/Manager");
 
 		int k = 0;
+		// cells = GetUsedCellsById(1);
 		foreach (var c in cells)
 		{
 			Vector2 cellData;
 			cellData = (Vector2) c;
-
-			// k = GetCell((int)cellData.x, (int)cellData.y);
-
-			tileDictionary.Add(k, cellData);
-			k++;
+			k = GetCellv(cellData);
+			tileDictionary.Add(cellData, k);
+			// k++;
 		}
 	}
 
@@ -71,13 +69,17 @@ public class GridMap : TileMap
 			// GD.Print(GridClamp(game.playerPosition) + " " + "CLAMPED GRID COORDINATES");
 			// GD.Print(CalculateMapPosition(game.playerPosition) + " " + "MAP POSITION ON GRID");
 
-			cellSelected = WorldToMap(game.playerPosition);
-			var tile_id = GetCellv(cellSelected);
-			GD.Print(tile_id + " " + cellSelected);
-
-			SetTiles(cellSelected);
-			UnSetTiles(cellSelected);
+			// cellSelected = WorldToMap(game.playerPosition);
+			// SetTiles(cellSelected);
+			// UnSetTiles(cellSelected);
 		}
+	}
+
+	public override void _Process(float delta)
+	{
+			cellSelected = WorldToMap(game.playerPosition);
+						SetTiles(cellSelected);
+			UnSetTiles(cellSelected);
 	}
 
 	/*
@@ -88,7 +90,8 @@ public class GridMap : TileMap
 
 	public int GetTileIndex(Vector2 tile)
 	{
-		int index = GetCell((int)tile.x, (int)tile.y);
+		int index = GetCellv(tile);
+
 		return index;
 	}
 
@@ -99,58 +102,51 @@ public class GridMap : TileMap
 			UNSET TILES OUTSIDE OF X/Y VIEW RANGE
 			
 		*/
-
-		for (int i = 0; i < tileDictionary.Count; i++)
+		foreach (var node in tileDictionary)
 		{
-			if (tileDictionary[i].x > refPosition.x + visionRangeX)
+			if (node.Key.x > refPosition.x + visionRangeX / 2)
 			{
-				SetCellv(tileDictionary[i], -1);
+				SetCellv(node.Key, -1);
 			}
-			if (tileDictionary[i].x < refPosition.x - visionRangeX)
+			if (node.Key.x < refPosition.x - visionRangeX / 2)
 			{
-				SetCellv(tileDictionary[i], -1);
+				SetCellv(node.Key, -1);
 			}
-			if (tileDictionary[i].y > refPosition.y + visionRangeY)
+			if (node.Key.y > refPosition.y + visionRangeY / 2)
 			{
-				SetCellv(tileDictionary[i], -1);
+				SetCellv(node.Key, -1);
 			}
-			if (tileDictionary[i].y < refPosition.y - visionRangeY)
+			if (node.Key.y < refPosition.y - visionRangeY / 2)
 			{
-				SetCellv(tileDictionary[i], -1);
+				SetCellv(node.Key, -1);
 			}
-			// else
-			// {
-			// 	SetCellv(tileDictionary[i], 1);
-			// }
 		}
 	}
 
 	public void SetTiles(Vector2 refPosition)
 	{
-
 		/*
 
 			SET TILES INSDE X/Y VIEW RANGE
 
 		*/
-
 		foreach (var node in tileDictionary)
 		{
-			if (node.Value.x < refPosition.x + 5)
+			if (node.Key.x < refPosition.x + visionRangeX)
 			{
-				SetCellv(node.Value, GetTileIndex(node.Value));
+				SetCellv(node.Key, node.Value);
 			}
-			if (node.Value.x > refPosition.x - 5)
+			if (node.Key.x > refPosition.x - visionRangeX)
 			{
-				SetCellv(node.Value, GetTileIndex(node.Value));
+				SetCellv(node.Key, node.Value);
 			}
-			if (node.Value.y < refPosition.y + 5)
+			if (node.Key.y < refPosition.y + visionRangeY)
 			{
-				SetCellv(node.Value, GetTileIndex(node.Value));
+				SetCellv(node.Key, node.Value);
 			}
-			if (node.Value.y > refPosition.y - 5)
+			if (node.Key.y > refPosition.y - visionRangeY)
 			{
-				SetCellv(node.Value, GetTileIndex(node.Value));
+				SetCellv(node.Key, node.Value);
 			}
 		}
 	}

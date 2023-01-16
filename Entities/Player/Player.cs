@@ -13,6 +13,15 @@ public class Player : Area2D
 	public Vector2 down = new Vector2(-1, 0);
 
 	Vector2 target;
+	Vector2 targetDir;
+	Vector2 direction;
+
+	int tileSize = 32;
+
+	[Export]
+	float maxSpeed = 5;
+	float speed;
+	Vector2 motion;
 
 	GameManager game;
 
@@ -20,22 +29,51 @@ public class Player : Area2D
 	public override void _Ready()
 	{
 		game = (GameManager)GetNode("/root/Main/Manager");
-		game.playerPosition = GlobalPosition;
+
+		Position = Position.Snapped(new Vector2(1, 1) * tileSize);
+		Position += new Vector2(1, 1) * tileSize / 2;
 	}
 
-	public void Move()
+	public void Move(Vector2 dir)
 	{
-		// target = game.selectedTile;
-		// if (target != null)
-		// {
-		// Position = target;
-		// GD.Print(Position);
-		// }
+		Position += dir;
+	}
+
+	public void CheckInputs()
+	{
+		if (Input.IsActionPressed("move_9"))
+		{
+			Move(up);
+		}
+		if (Input.IsActionPressed("move_7"))
+		{
+			Move(down);
+		}
+		if (Input.IsActionPressed("move_1"))
+		{
+			Move(left);
+		}
+		if (Input.IsActionPressed("move_3"))
+		{
+			Move(right);
+		}
+	}
+
+
+	/*
+
+	Get the X value of the Isometric scale w/ x-y & get the Y w/ x+y halved;
+
+	*/
+	public Vector2 CartesianToIso(Vector2 v)
+	{
+		return new Vector2(v.x - v.y, (v.x + v.y) / 2);
 	}
 
 	public override void _Process(float delta)
 	{
-		GlobalPosition = game.playerPosition;
-		Move();
+		// Position = Position.Snapped(new Vector2(1, 1) * tileSize);
+		game.playerPosition = GlobalPosition;
+		CheckInputs();
 	}
 }
