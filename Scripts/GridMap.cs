@@ -35,7 +35,7 @@ public class GridMap : TileMap
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
 
-		int k = 0;
+		int k;
 		// cells = GetUsedCellsById(1);
 		foreach (var c in cells)
 		{
@@ -62,8 +62,8 @@ public class GridMap : TileMap
 	public override void _Process(float delta)
 	{
 			cellSelected = WorldToMap(game.playerPosition);
-						SetTiles(cellSelected);
 			UnSetTiles(cellSelected);
+			SetTiles(cellSelected);
 	}
 
 	/*
@@ -110,13 +110,11 @@ public class GridMap : TileMap
 	{
 		return gridPosition * cellSize + cellHalf;
 	}
-
 	/*
 
 	returns the coordinates of a cell on the grid
 
 	*/
-
 	public Vector2 CalculateGridCoordinates(Vector2 mapPosition)
 	{
 		Vector2 gridCoordinates = (mapPosition /  cellSize);
@@ -125,19 +123,16 @@ public class GridMap : TileMap
 		// return new Vector2(Mathf.Floor(gridCoordinates.x), Mathf.Floor(gridCoordinates.y));
 		return gridCoordinates;
 	}
-
 	/*
 
 	returns the x y coordinates to make sure the cell is in bounds of the grid
 
 	*/
-
 	public bool IsInBounds(Vector2 cellCoordinates)
 	{
 		bool outOfBounds = cellCoordinates.x >= 0 && cellCoordinates.x < size.x;
 		return outOfBounds && cellCoordinates.y >= 0 && cellCoordinates.y < size.y;
 	}
-
 	/* 
 
 	clamp function returns x and y values smaller than the size of the grid
