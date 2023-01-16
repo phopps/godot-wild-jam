@@ -13,7 +13,12 @@ public class GridMap : TileMap
 
 	public Godot.Collections.Array cells;
 	public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
+	
+	// TileDictionary<int, TValue> tileDict = new TileDictionary<int, TValue>();
+	// TileDictionaryint  tileDict;
 	GameManager game;
+
+	TileDictionary<Tile.TileData> tileDict = new TileDictionary<Tile.TileData>();
 
 	[Export]
 	public Vector2 cellSize;
@@ -34,16 +39,22 @@ public class GridMap : TileMap
 		cells = GetUsedCells();
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
+		// var tileDict = (TileDictionary)GetNode("/root/Node2D");
+		// var tileDict = new TileDictionary<Tile.TileData>();
 
-		int k;
+		// tileDict = new TileDictionary<int, TileData>();
+
+		int k = 0;
+		int i;
 		// cells = GetUsedCellsById(1);
 		foreach (var c in cells)
 		{
 			Vector2 cellData;
-			cellData = (Vector2) c;
-			k = GetCellv(cellData);
-			tileDictionary.Add(cellData, k);
-			// k++;
+			cellData =  (Vector2)c;
+			i = GetCellv(cellData);
+			GD.Print(i);
+			tileDict.Add(k, cellData, 1, i);
+			k++;
 		}
 	}
 
@@ -82,12 +93,12 @@ public class GridMap : TileMap
 		/*
 			UNSET TILES OUTSIDE OF X/Y VIEW RANGE
 		*/
-		foreach (var node in tileDictionary)
+		foreach (var node in tileDict)
 		{
 
-			if (InCircle(refPosition, node.Key) == false)
+			if (InCircle(refPosition, node.Value.coord) == false)
 			{
-				SetCellv(node.Key, -1);
+				SetCellv(node.Value.coord, -1);
 			}
 		}
 	}
@@ -97,11 +108,11 @@ public class GridMap : TileMap
 		/*
 			SET TILES INSDE X/Y VIEW RANGE
 		*/
-		foreach (var node in tileDictionary)
+		foreach (var node in tileDict)
 		{
-			if (InCircle(refPosition, node.Key) == true)
+			if (InCircle(refPosition, node.Value.coord) == true)
 			{
-				SetCellv(node.Key, node.Value);
+				SetCellv(node.Value.coord, node.Value.index);
 			}
 		}
 	}
