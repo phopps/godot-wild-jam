@@ -25,9 +25,8 @@ public class GridMap : TileMap
 	public Vector2 cellPosition;
 
 	[Export]
-	public int visionRangeX;
-	[Export]
-	public int visionRangeY;
+	public int visionRange;
+	double radius;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -49,30 +48,15 @@ public class GridMap : TileMap
 	}
 
 	/*
-
-	ATTEMPT AT A MOUSE OVER TO SELECT TILE
-
+	THIS METHOD DRAWS A CIRCLE AROUND THE PLAYER WITH TILES IN THEIR VISION RANGE
 	*/
-	
-	public override void _UnhandledInput(InputEvent @event)
+
+	public bool InCircle(Vector2 player, Vector2 tile)
 	{
-		if (@event is InputEventMouseButton mouseEvent)
-		{	
-
-			// GD.Print(game.playerPosition);
-
-			// game.playerPosition = CalculateMapPosition(game.playerPosition);
-
-			// GD.Print(CalculateGridCoordinates(game.playerPosition) + " " + "GRID COORDINATES");
-			// GD.Print(IsInBounds(game.playerPosition) + " " + "IN BOUNDS");
-			// GD.Print(CellToIndex(game.playerPosition) + " " + "INDEX OF CELL");
-			// GD.Print(GridClamp(game.playerPosition) + " " + "CLAMPED GRID COORDINATES");
-			// GD.Print(CalculateMapPosition(game.playerPosition) + " " + "MAP POSITION ON GRID");
-
-			// cellSelected = WorldToMap(game.playerPosition);
-			// SetTiles(cellSelected);
-			// UnSetTiles(cellSelected);
-		}
+		float dx = player.x - tile.x;
+		float dy = player.y - tile.y;
+		float distance = Mathf.Sqrt(dx*dx + dy*dy);
+		return distance <= visionRange;
 	}
 
 	public override void _Process(float delta)
@@ -83,9 +67,7 @@ public class GridMap : TileMap
 	}
 
 	/*
-
 	CONVERTS THE TILES VECTOR TO INT FOR SETTING INDEX WHEN SETTING TILES
-
 	*/
 
 	public int GetTileIndex(Vector2 tile)
@@ -98,25 +80,12 @@ public class GridMap : TileMap
 	public void UnSetTiles(Vector2 refPosition)
 	{
 		/*
-
 			UNSET TILES OUTSIDE OF X/Y VIEW RANGE
-			
 		*/
 		foreach (var node in tileDictionary)
 		{
-			if (node.Key.x > refPosition.x + visionRangeX / 2)
-			{
-				SetCellv(node.Key, -1);
-			}
-			if (node.Key.x < refPosition.x - visionRangeX / 2)
-			{
-				SetCellv(node.Key, -1);
-			}
-			if (node.Key.y > refPosition.y + visionRangeY / 2)
-			{
-				SetCellv(node.Key, -1);
-			}
-			if (node.Key.y < refPosition.y - visionRangeY / 2)
+
+			if (InCircle(refPosition, node.Key) == false)
 			{
 				SetCellv(node.Key, -1);
 			}
@@ -126,25 +95,11 @@ public class GridMap : TileMap
 	public void SetTiles(Vector2 refPosition)
 	{
 		/*
-
 			SET TILES INSDE X/Y VIEW RANGE
-
 		*/
 		foreach (var node in tileDictionary)
 		{
-			if (node.Key.x < refPosition.x + visionRangeX)
-			{
-				SetCellv(node.Key, node.Value);
-			}
-			if (node.Key.x > refPosition.x - visionRangeX)
-			{
-				SetCellv(node.Key, node.Value);
-			}
-			if (node.Key.y < refPosition.y + visionRangeY)
-			{
-				SetCellv(node.Key, node.Value);
-			}
-			if (node.Key.y > refPosition.y - visionRangeY)
+			if (InCircle(refPosition, node.Key) == true)
 			{
 				SetCellv(node.Key, node.Value);
 			}
