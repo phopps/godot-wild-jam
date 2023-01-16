@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TreeExt.png-fba3a8607a886db31badb2bc1255b058.stex"
+path="res://.import/Grass.png-58eed5235e3048b3116dd3efafa83983.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/TreeExt.png"
-dest_files=[ "res://.import/TreeExt.png-fba3a8607a886db31badb2bc1255b058.stex" ]
+source_file="res://Assets/Tiles/Biomes/Grass.png"
+dest_files=[ "res://.import/Grass.png-58eed5235e3048b3116dd3efafa83983.stex" ]
 
 [params]
 

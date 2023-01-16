@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TreeLeaves.png-8bbab82407016bd7328e0ef6e6dd330a.stex"
+path="res://.import/GrassColor.png-13b57878d22671ac1c8c325b2d2b89e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/TreeLeaves.png"
-dest_files=[ "res://.import/TreeLeaves.png-8bbab82407016bd7328e0ef6e6dd330a.stex" ]
+source_file="res://Assets/Tiles/Biomes/GrassColor.png"
+dest_files=[ "res://.import/GrassColor.png-13b57878d22671ac1c8c325b2d2b89e2.stex" ]
 
 [params]
 

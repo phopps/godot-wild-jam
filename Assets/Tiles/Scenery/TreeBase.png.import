@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TreeLeavesColor.png-4d5c922ef958da2e664de29de8d3f6bb.stex"
+path="res://.import/TreeBase.png-f8c805e2656023ebf3e20cdf7fba9291.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/TreeLeavesColor.png"
-dest_files=[ "res://.import/TreeLeavesColor.png-4d5c922ef958da2e664de29de8d3f6bb.stex" ]
+source_file="res://Assets/Tiles/Scenery/TreeBase.png"
+dest_files=[ "res://.import/TreeBase.png-f8c805e2656023ebf3e20cdf7fba9291.stex" ]
 
 [params]
 

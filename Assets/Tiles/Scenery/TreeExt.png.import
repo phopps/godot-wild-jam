@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IsometricTileBaseNoGrid.png-d9bbb47c1d9a8c577ff97b7c96bd271c.stex"
+path="res://.import/TreeExt.png-86e9c2d24a3ca1bb510f0b704c8d5b1f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/IsometricTileBaseNoGrid.png"
-dest_files=[ "res://.import/IsometricTileBaseNoGrid.png-d9bbb47c1d9a8c577ff97b7c96bd271c.stex" ]
+source_file="res://Assets/Tiles/Scenery/TreeExt.png"
+dest_files=[ "res://.import/TreeExt.png-86e9c2d24a3ca1bb510f0b704c8d5b1f.stex" ]
 
 [params]
 

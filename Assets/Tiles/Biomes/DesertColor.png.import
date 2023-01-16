@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TreeBase.png-fc232ea241f0378e629d0ec5a4ce932c.stex"
+path="res://.import/DesertColor.png-7ebc8d2878ca11e84f6a651bb1dadc96.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/TreeBase.png"
-dest_files=[ "res://.import/TreeBase.png-fc232ea241f0378e629d0ec5a4ce932c.stex" ]
+source_file="res://Assets/Tiles/Biomes/DesertColor.png"
+dest_files=[ "res://.import/DesertColor.png-7ebc8d2878ca11e84f6a651bb1dadc96.stex" ]
 
 [params]
 
