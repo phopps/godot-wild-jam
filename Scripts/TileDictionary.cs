@@ -9,6 +9,8 @@ public class Tile : Node2D
 		public Vector2 coord;
 		public int step;
 		public int index;
+		public string biome;
+		public bool color;
 	}
 }
 

@@ -12,7 +12,7 @@ public class GridMap : TileMap
 	*/
 
 	public Godot.Collections.Array cells;
-	public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
+	// public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
 	
 	// TileDictionary<int, TValue> tileDict = new TileDictionary<int, TValue>();
 	// TileDictionaryint  tileDict;
@@ -31,7 +31,6 @@ public class GridMap : TileMap
 
 	[Export]
 	public int visionRange;
-	double radius;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -39,10 +38,7 @@ public class GridMap : TileMap
 		cells = GetUsedCells();
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
-		// var tileDict = (TileDictionary)GetNode("/root/Node2D");
-		// var tileDict = new TileDictionary<Tile.TileData>();
 
-		// tileDict = new TileDictionary<int, TileData>();
 
 		int k = 0;
 		int i;
@@ -52,7 +48,6 @@ public class GridMap : TileMap
 			Vector2 cellData;
 			cellData =  (Vector2)c;
 			i = GetCellv(cellData);
-			GD.Print(i);
 			tileDict.Add(k, cellData, 1, i);
 			k++;
 		}

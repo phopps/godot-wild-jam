@@ -12,16 +12,7 @@ public class Player : Area2D
 	public Vector2 left = new Vector2(0, 1);
 	public Vector2 down = new Vector2(-1, 0);
 
-	Vector2 target;
-	Vector2 targetDir;
-	Vector2 direction;
-
 	int tileSize = 32;
-
-	[Export]
-	float maxSpeed = 5;
-	float speed;
-	Vector2 motion;
 
 	GameManager game;
 
