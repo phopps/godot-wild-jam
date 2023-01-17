@@ -40,6 +40,8 @@ public class GridMap : TileMap
 		game = (GameManager)GetNode("/root/Main/Manager");
 
 
+
+		// k is the tile key
 		int k = 0;
 		int i;
 		// cells = GetUsedCellsById(1);
@@ -47,8 +49,15 @@ public class GridMap : TileMap
 		{
 			Vector2 cellData;
 			cellData =  (Vector2)c;
+			// i is index of the tile
 			i = GetCellv(cellData);
-			tileDict.Add(k, cellData, 1, i);
+			// n is name of the tile in a string for reference later
+			string n = TileSet.TileGetName(i);
+			if (n == null)
+			{
+				n = "empty";
+			}
+			tileDict.Add(k, cellData, n, i, false);
 			k++;
 		}
 	}
@@ -108,7 +117,68 @@ public class GridMap : TileMap
 			if (InCircle(refPosition, node.Value.coord) == true)
 			{
 				SetCellv(node.Value.coord, node.Value.index);
+				if (game.green == true)
+				{
+					SetGreenTiles(node.Value);
+				}
+				if (game.blue == true)
+				{
+					SetBlueTiles(node.Value);
+				}
+				if (game.orange == true)
+				{
+					SetOrangeTiles(node.Value);
+				}
+				
 			}
+		}
+	}
+
+	public void SetGreenTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}green");
+
+		if (tile.name.Contains("green"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}green";
+			tile.index = i;
+			SetCellv(tile.coord, tile.index);
+		}
+	}
+
+	public void SetOrangeTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}orange");
+
+		if (tile.name.Contains("orange"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}orange";
+			tile.index = i;
+			SetCellv(tile.coord, tile.index);
+		}
+	}
+
+	public void SetBlueTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}blue");
+
+		if (tile.name.Contains("blue"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}blue";
+			tile.index = i;
+			SetCellv(tile.coord, tile.index);
 		}
 	}
 
@@ -156,5 +226,23 @@ public class GridMap : TileMap
 	{
 		int index = (int) Mathf.Round(cell.x += size.x * cell.y);
 		return index;
+	}
+
+
+
+	public override void _Input(InputEvent inputEvent)
+	{
+		if (Input.IsActionPressed("ui_accept"))
+		{
+			game.orange = true;
+			game.blue = true;
+			game.green = true;
+		}
+		else
+		{
+			game.blue = false;
+			game.orange = false;
+			game.green = false;
+		}
 	}
 }

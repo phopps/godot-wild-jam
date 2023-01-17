@@ -7,22 +7,22 @@ public class Tile : Node2D
 	public struct TileData
 	{
 		public Vector2 coord;
-		public int step;
 		public int index;
-		public string biome;
-		public bool color;
+		public string name;
+		public bool colorActive;
 	}
 }
 
 public class TileDictionary<TileData> : System.Collections.Generic.Dictionary<int, Tile.TileData>
 {
 
-	public void Add(int key, Vector2 coord, int step, int index)
+	public void Add(int key, Vector2 coord, string name, int index, bool colorActive)
 	{
 		Tile.TileData val;
 		val.coord = coord;
-		val.step = step;
 		val.index = index;
+		val.name = name;
+		val.colorActive = colorActive;
 		this.Add(key, val);
 	}
 }
