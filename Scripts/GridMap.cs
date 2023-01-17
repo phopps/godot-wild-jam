@@ -39,8 +39,6 @@ public class GridMap : TileMap
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
 
-
-
 		// k is the tile key
 		int k = 0;
 		int i;

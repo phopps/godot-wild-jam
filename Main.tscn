@@ -17,3 +17,6 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Manager" parent="." instance=ExtResource( 4 )]
+dayLength = 1000
+rate = 0.001
+light = 0.8
