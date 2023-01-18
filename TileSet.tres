@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=25 format=2]
+[gd_resource type="TileSet" load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Tiles/Biomes/Tundra.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tiles/TranslucentGrid.png" type="Texture" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://Assets/Tiles/Biomes/GrassColor.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Tiles/Biomes/Grass.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Tiles/Biomes/TundraColor.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Tiles/Machinery/rubbliepile.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Tiles/Machinery/rubblepile-sheet.png" type="Texture" id=18]
+[ext_resource path="res://Resources/ChargeStation.tres" type="Texture" id=19]
+[ext_resource path="res://Assets/Tiles/Machinery/chargestation.png" type="Texture" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -322,3 +326,59 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 20/shape_one_way_margin = 0.0
 20/shapes = [  ]
 20/z_index = 0
+21/name = "rubble"
+21/texture = ExtResource( 17 )
+21/tex_offset = Vector2( 0, -16 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 0, 0, 32, 32 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
+21/shapes = [  ]
+21/z_index = 0
+22/name = "rubbleviolet"
+22/texture = ExtResource( 18 )
+22/tex_offset = Vector2( 0, -16 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 0, 0, 32, 32 )
+22/tile_mode = 0
+22/occluder_offset = Vector2( 0, 0 )
+22/navigation_offset = Vector2( 0, 0 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape_one_way = false
+22/shape_one_way_margin = 0.0
+22/shapes = [  ]
+22/z_index = 0
+23/name = "station"
+23/texture = ExtResource( 20 )
+23/tex_offset = Vector2( 0, -16 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 0, 0, 32, 32 )
+23/tile_mode = 0
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
+23/shapes = [  ]
+23/z_index = 0
+24/name = "stationviolet"
+24/texture = ExtResource( 19 )
+24/tex_offset = Vector2( 0, -16 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 0, 0, 32, 32 )
+24/tile_mode = 0
+24/occluder_offset = Vector2( 0, 0 )
+24/navigation_offset = Vector2( 0, 0 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
+24/shapes = [  ]
+24/z_index = 0
