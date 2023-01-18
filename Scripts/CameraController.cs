@@ -5,16 +5,9 @@ public class CameraController : Camera2D
 {
 
     [Export]
-    float limiter;
+    float limiter = 0;
     [Export]
-    float offset;
-    [Export]
-    float speed;
-
-    private float t = 0.0f;
-
-    Vector2 targetX;
-    Vector2 targetY;
+    float speed = 0;
 
     GameManager game;
 

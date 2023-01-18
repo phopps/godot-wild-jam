@@ -7,6 +7,17 @@ public class Player : Area2D
 	// private int a = 2;
 	// private string b = "text";
 
+	public int temp;
+	[Export]
+	public int maxTemp;
+	[Export]
+	public int minTemp;
+
+	public int charge;
+	[Export]
+	public int maxCharge;
+
+
 	public Vector2 up = new Vector2(0, -1);
 	public Vector2 right = new Vector2(1, 0);
 	public Vector2 left = new Vector2(0, 1);
@@ -63,8 +74,8 @@ public class Player : Area2D
 
 	public override void _Process(float delta)
 	{
-		// Position = Position.Snapped(new Vector2(1, 1) * tileSize);
 		game.playerPosition = GlobalPosition;
+		// Position = Position.Snapped(new Vector2(1,osition = GlobalPosition;
 		CheckInputs();
 	}
 }
