@@ -29,12 +29,25 @@ public class GridMap : TileMap
 	public Vector2 cellSelected;
 	public Vector2 cellPosition;
 
+	// public string[] tags;
+
+	public enum tags
+	{
+		grass,
+		desert,
+		tundra,
+		charge,
+		rubble,
+		water
+	}
+
 	[Export]
 	public int visionRange;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// tags = ["grass", "desert", "tundra", "charge", "rubble", "water"];
 		cells = GetUsedCells();
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
@@ -51,6 +64,18 @@ public class GridMap : TileMap
 			i = GetCellv(cellData);
 			// n is name of the tile in a string for reference later
 			string n = TileSet.TileGetName(i);
+			string t;
+			int hIndex;
+			int cIndex;
+			bool b;
+
+			// t == n.Contains(tags.grass.ToString()) : t = "grass" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "water" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "tundra" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "charge" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "rubble" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "water" ? t = "null";
+
 			if (n == null)
 			{
 				n = "empty";
