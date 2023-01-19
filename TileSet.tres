@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=41 format=2]
+[gd_resource type="TileSet" load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Tiles/Biomes/Tundra.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tiles/TranslucentGrid.png" type="Texture" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://Assets/Tiles/Container/containerwalltopcorner.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Tiles/Container/containerwallbot.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Tiles/Container/dooropentopright.png" type="Texture" id=32]
+[ext_resource path="res://Resources/Goo.tres" type="Texture" id=33]
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -582,3 +583,17 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 38/shape_one_way_margin = 0.0
 38/shapes = [  ]
 38/z_index = 0
+39/name = "Goo.tres 39"
+39/texture = ExtResource( 33 )
+39/tex_offset = Vector2( 0, 0 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 0, 0, 32, 32 )
+39/tile_mode = 0
+39/occluder_offset = Vector2( 0, 0 )
+39/navigation_offset = Vector2( 0, 0 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape_one_way = false
+39/shape_one_way_margin = 0.0
+39/shapes = [  ]
+39/z_index = 0
