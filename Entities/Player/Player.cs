@@ -3,77 +3,100 @@ using System;
 
 public class Player : Area2D
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
+    // Declare member variables here. Examples:
+    // private int a = 2;
+    // private string b = "text";
+    [Export] public int speed = 100;
+    public Vector2 velocity = new Vector2();
+    public Vector2 tileSize = new Vector2(32, 16);
+    public int rotationDirection = 0;
+    GameManager game;
 
-	public Vector2 up = new Vector2(0, -1);
-	public Vector2 right = new Vector2(1, 0);
-	public Vector2 left = new Vector2(0, 1);
-	public Vector2 down = new Vector2(-1, 0);
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        game = (GameManager)GetNode("/root/Main/Manager");
+        Position = new Vector2(16, 0);
+    }
 
-	Vector2 target;
-	Vector2 targetDir;
-	Vector2 direction;
+    public void GetInput()
+    {
+        velocity = new Vector2(); // (0, 0)
 
-	int tileSize = 32;
+        if (Input.IsActionPressed("up"))
+        {
+            // velocity = new Vector2(32, -16).Rotated(rotationDirection);
+            velocity = new Vector2(32, -16).Rotated(rotationDirection);
+            velocity = velocity.Snapped(tileSize) * 2;
 
-	[Export]
-	float maxSpeed = 5;
-	float speed;
-	Vector2 motion;
+        }
+        if (Input.IsActionPressed("down"))
+        {
+            velocity = new Vector2(-32, 16).Rotated(rotationDirection);
+            velocity = velocity.Snapped(tileSize);
+        }
 
-	GameManager game;
+    }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		game = (GameManager)GetNode("/root/Main/Manager");
+    public override void _Input(InputEvent inputEvent)
+    {
+        // if (inputEvent.IsActionPressed("left"))
+        // {
+        //     RotationDegrees -= 90;
+        // }
+        // if (inputEvent.IsActionPressed("right"))
+        // {
+        //     RotationDegrees += 90;
+        // }
+        // var playerLocation = Position;
+        if (inputEvent.IsActionPressed("left"))
+        {
+            if (rotationDirection == 4)
+            {
+                rotationDirection -= 1;
+            }
+            else if (rotationDirection == 3)
+            {
+                rotationDirection -= 2;
+            }
+            else
+            {
+                rotationDirection += 4;
+                if (rotationDirection >= 5)
+                {
+                    rotationDirection = 0;
+                }
+            }
+        }
+        if (inputEvent.IsActionPressed("right"))
+        {
+            if (rotationDirection == 1)
+            {
+                rotationDirection += 2;
+            }
+            else
+            {
+                rotationDirection += 1;
+                if (rotationDirection >= 5)
+                {
+                    rotationDirection = 0;
+                }
+            }
+        }
 
-		Position = Position.Snapped(new Vector2(1, 1) * tileSize);
-		Position += new Vector2(1, 1) * tileSize / 2;
-	}
-
-	public void Move(Vector2 dir)
-	{
-		Position += dir;
-	}
-
-	public void CheckInputs()
-	{
-		if (Input.IsActionPressed("move_9"))
-		{
-			Move(up);
-		}
-		if (Input.IsActionPressed("move_7"))
-		{
-			Move(down);
-		}
-		if (Input.IsActionPressed("move_1"))
-		{
-			Move(left);
-		}
-		if (Input.IsActionPressed("move_3"))
-		{
-			Move(right);
-		}
-	}
-
-
-	/*
-
-	Get the X value of the Isometric scale w/ x-y & get the Y w/ x+y halved;
-
-	*/
-	public Vector2 CartesianToIso(Vector2 v)
-	{
-		return new Vector2(v.x - v.y, (v.x + v.y) / 2);
-	}
-
-	public override void _Process(float delta)
-	{
-		// Position = Position.Snapped(new Vector2(1, 1) * tileSize);
-		game.playerPosition = GlobalPosition;
-		CheckInputs();
-	}
+        // if (inputEvent.IsActionPressed("up"))
+        // {
+        //     playerLocation.x += 32;
+        //     playerLocation.y -= 16;
+        //     Position = playerLocation;
+        // }
+    }
+    public override void _Process(float delta)
+    {
+        game.playerPosition = GlobalPosition;
+        GetInput();
+        Position += velocity;
+        // Position += velocity * delta;
+        GD.Print(Position.Snapped(tileSize));
+    }
 }

@@ -10,7 +10,9 @@
 [node name="WorldSpace" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 34, 9 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 2 )]
 current = true
