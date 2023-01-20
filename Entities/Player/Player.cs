@@ -10,6 +10,7 @@ public class Player : Area2D
     public Vector2 velocity = new Vector2();
     public Vector2 tileSize = new Vector2(32, 16);
     public int rotationDirection = 0;
+    private Timer movementCooldown;
     GameManager game;
 
     // Called when the node enters the scene tree for the first time.
@@ -17,38 +18,33 @@ public class Player : Area2D
     {
         game = (GameManager)GetNode("/root/Main/Manager");
         Position = new Vector2(16, 0);
+        movementCooldown = GetNode<Timer>("MovementCooldown");
     }
 
     public void GetInput()
     {
-        velocity = new Vector2(); // (0, 0)
-
-        if (Input.IsActionPressed("up"))
+        if (movementCooldown.IsStopped())
         {
-            // velocity = new Vector2(32, -16).Rotated(rotationDirection);
-            velocity = new Vector2(32, -16).Rotated(rotationDirection);
-            velocity = velocity.Snapped(tileSize) * 2;
-
+            velocity = new Vector2(); // (0, 0)
+            if (Input.IsActionPressed("up"))
+            {
+                velocity = new Vector2(1, -1) * tileSize / 2;
+                Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
+                // start cooldown
+                movementCooldown.Start();
+            }
+            else if (Input.IsActionPressed("down"))
+            {
+                velocity = new Vector2(-1, 1) * tileSize / 2;
+                Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
+                // start cooldown
+                movementCooldown.Start();
+            }
         }
-        if (Input.IsActionPressed("down"))
-        {
-            velocity = new Vector2(-32, 16).Rotated(rotationDirection);
-            velocity = velocity.Snapped(tileSize);
-        }
-
     }
 
     public override void _Input(InputEvent inputEvent)
     {
-        // if (inputEvent.IsActionPressed("left"))
-        // {
-        //     RotationDegrees -= 90;
-        // }
-        // if (inputEvent.IsActionPressed("right"))
-        // {
-        //     RotationDegrees += 90;
-        // }
-        // var playerLocation = Position;
         if (inputEvent.IsActionPressed("left"))
         {
             if (rotationDirection == 4)
@@ -83,20 +79,10 @@ public class Player : Area2D
                 }
             }
         }
-
-        // if (inputEvent.IsActionPressed("up"))
-        // {
-        //     playerLocation.x += 32;
-        //     playerLocation.y -= 16;
-        //     Position = playerLocation;
-        // }
     }
     public override void _Process(float delta)
     {
         game.playerPosition = GlobalPosition;
         GetInput();
-        Position += velocity;
-        // Position += velocity * delta;
-        GD.Print(Position.Snapped(tileSize));
     }
 }

@@ -63,5 +63,9 @@ margin_bottom = 10.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
-frame = 1
+frame = 6
 playing = true
+
+[node name="MovementCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
