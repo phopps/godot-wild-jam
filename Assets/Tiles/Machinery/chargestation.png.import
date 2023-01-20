@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileCliffRight.png-e81fa9092b28b2b09885950f3e4cdaea.stex"
+path="res://.import/chargestation.png-3be26b4545313997d4b925a45cf118e9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/TileCliffRight.png"
-dest_files=[ "res://.import/TileCliffRight.png-e81fa9092b28b2b09885950f3e4cdaea.stex" ]
+source_file="res://Assets/Tiles/Machinery/chargestation.png"
+dest_files=[ "res://.import/chargestation.png-3be26b4545313997d4b925a45cf118e9.stex" ]
 
 [params]
 

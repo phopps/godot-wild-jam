@@ -23,7 +23,7 @@ public class DrawGrid : Node2D
 	public Vector2 size;
 
 	// Called when the node enters the scene tree for the first time.
-	public void _draw()
+	public override void _Draw()
 	{
 
 		cam = new Vector2(10,10);

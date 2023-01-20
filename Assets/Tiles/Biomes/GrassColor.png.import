@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileCliffLeft.png-230c528ff3801e407c9bfdb9c24a0e55.stex"
+path="res://.import/GrassColor.png-13b57878d22671ac1c8c325b2d2b89e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/TileCliffLeft.png"
-dest_files=[ "res://.import/TileCliffLeft.png-230c528ff3801e407c9bfdb9c24a0e55.stex" ]
+source_file="res://Assets/Tiles/Biomes/GrassColor.png"
+dest_files=[ "res://.import/GrassColor.png-13b57878d22671ac1c8c325b2d2b89e2.stex" ]
 
 [params]
 

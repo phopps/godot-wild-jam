@@ -85,4 +85,5 @@ public class Player : Area2D
         game.playerPosition = GlobalPosition;
         GetInput();
     }
-}
+ }
+	

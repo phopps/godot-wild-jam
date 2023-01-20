@@ -12,8 +12,13 @@ public class GridMap : TileMap
 	*/
 
 	public Godot.Collections.Array cells;
-	public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
+	// public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
+	
+	// TileDictionary<int, TValue> tileDict = new TileDictionary<int, TValue>();
+	// TileDictionaryint  tileDict;
 	GameManager game;
+
+	TileDictionary<Tile.TileData> tileDict = new TileDictionary<Tile.TileData>();
 
 	[Export]
 	public Vector2 cellSize;
@@ -24,26 +29,59 @@ public class GridMap : TileMap
 	public Vector2 cellSelected;
 	public Vector2 cellPosition;
 
+	// public string[] tags;
+
+	public enum tags
+	{
+		grass,
+		desert,
+		tundra,
+		charge,
+		rubble,
+		water
+	}
+
 	[Export]
 	public int visionRange;
-	double radius;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// tags = ["grass", "desert", "tundra", "charge", "rubble", "water"];
 		cells = GetUsedCells();
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
 
-		int k;
+		// k is the tile key
+		int k = 0;
+		int i;
 		// cells = GetUsedCellsById(1);
 		foreach (var c in cells)
 		{
 			Vector2 cellData;
-			cellData = (Vector2) c;
-			k = GetCellv(cellData);
-			tileDictionary.Add(cellData, k);
-			// k++;
+			cellData =  (Vector2)c;
+			// i is index of the tile
+			i = GetCellv(cellData);
+			// n is name of the tile in a string for reference later
+			string n = TileSet.TileGetName(i);
+			string t;
+			int hIndex;
+			int cIndex;
+			bool b;
+
+			// t == n.Contains(tags.grass.ToString()) : t = "grass" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "water" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "tundra" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "charge" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "rubble" ? t = "null";
+			// b = n.Contains(tags.grass.ToString()) : t = "water" ? t = "null";
+
+			if (n == null)
+			{
+				n = "empty";
+			}
+			tileDict.Add(k, cellData, n, i, false);
+			k++;
 		}
 	}
 
@@ -82,12 +120,12 @@ public class GridMap : TileMap
 		/*
 			UNSET TILES OUTSIDE OF X/Y VIEW RANGE
 		*/
-		foreach (var node in tileDictionary)
+		foreach (var node in tileDict)
 		{
 
-			if (InCircle(refPosition, node.Key) == false)
+			if (InCircle(refPosition, node.Value.coord) == false)
 			{
-				SetCellv(node.Key, -1);
+				SetCellv(node.Value.coord, -1);
 			}
 		}
 	}
@@ -97,12 +135,73 @@ public class GridMap : TileMap
 		/*
 			SET TILES INSDE X/Y VIEW RANGE
 		*/
-		foreach (var node in tileDictionary)
+		foreach (var node in tileDict)
 		{
-			if (InCircle(refPosition, node.Key) == true)
+			if (InCircle(refPosition, node.Value.coord) == true)
 			{
-				SetCellv(node.Key, node.Value);
+				SetCellv(node.Value.coord, node.Value.index);
+				if (game.green == true)
+				{
+					SetGreenTiles(node.Value);
+				}
+				if (game.blue == true)
+				{
+					SetBlueTiles(node.Value);
+				}
+				if (game.orange == true)
+				{
+					SetOrangeTiles(node.Value);
+				}
+				
 			}
+		}
+	}
+
+	public void SetGreenTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}green");
+
+		if (tile.name.Contains("green"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}green";
+			tile.index = i;
+			SetCellv(tile.coord, tile.index);
+		}
+	}
+
+	public void SetOrangeTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}orange");
+
+		if (tile.name.Contains("orange"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}orange";
+			tile.index = i;
+			SetCellv(tile.coord, tile.index);
+		}
+	}
+
+	public void SetBlueTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}blue");
+
+		if (tile.name.Contains("blue"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}blue";
+			tile.index = i;
+			SetCellv(tile.coord, tile.index);
 		}
 	}
 
@@ -150,5 +249,23 @@ public class GridMap : TileMap
 	{
 		int index = (int) Mathf.Round(cell.x += size.x * cell.y);
 		return index;
+	}
+
+
+
+	public override void _Input(InputEvent inputEvent)
+	{
+		if (Input.IsActionPressed("ui_accept"))
+		{
+			game.orange = true;
+			game.blue = true;
+			game.green = true;
+		}
+		else
+		{
+			game.blue = false;
+			game.orange = false;
+			game.green = false;
+		}
 	}
 }
