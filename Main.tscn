@@ -15,6 +15,10 @@
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
+__meta__ = {
+"_edit_group_": true
+}
+
 [node name="Manager" parent="." instance=ExtResource( 4 )]
 dayLength = 1000
 rate = 0.001
