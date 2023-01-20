@@ -38,7 +38,7 @@ public class GameManager : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		map = (GridMap)GetNode("/root/Main/WorldSpace/Node2D/ParentGrid");
+		map = (GridMap)GetNode("/root/Main/WorldSpace/Node2D/ParentMap");
 		map.Modulate = new Color(light, light, light, 1);
 		time = dayLength / 2;
 	}

@@ -12,11 +12,12 @@ public class GridMap : TileMap
 	*/
 
 	public Godot.Collections.Array cells;
-	// public Godot.Collections.Dictionary<Vector2, int> tileDictionary = new Godot.Collections.Dictionary<Vector2, int>();
-	
-	// TileDictionary<int, TValue> tileDict = new TileDictionary<int, TValue>();
-	// TileDictionaryint  tileDict;
 	GameManager game;
+
+	TileMap groundMap;
+	TileMap sceneryMap;
+	TileMap stepOneMap;
+	TileMap stepTwoMap;
 
 	TileDictionary<Tile.TileData> tileDict = new TileDictionary<Tile.TileData>();
 
@@ -29,7 +30,8 @@ public class GridMap : TileMap
 	public Vector2 cellSelected;
 	public Vector2 cellPosition;
 
-	// public string[] tags;
+	int k;
+	int e;
 
 	public enum tags
 	{
@@ -37,8 +39,9 @@ public class GridMap : TileMap
 		desert,
 		tundra,
 		charge,
-		rubble,
-		water
+		item,
+		water,
+		empty
 	}
 
 	[Export]
@@ -48,41 +51,109 @@ public class GridMap : TileMap
 	public override void _Ready()
 	{
 		// tags = ["grass", "desert", "tundra", "charge", "rubble", "water"];
-		cells = GetUsedCells();
+		
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
 
+		groundMap = (TileMap)GetNode("Ground");
+		sceneryMap = (TileMap)GetNode("Scenery");
+		stepOneMap = (TileMap)GetNode("Step1");
+		stepTwoMap = (TileMap)GetNode("Step2");
+
 		// k is the tile key
-		int k = 0;
+		k = 0;
+		e = 0;
+		FillDictionary(groundMap);
+		FillDictionary(sceneryMap);
+		e++;
+		FillDictionary(stepOneMap);
+		e++;
+		FillDictionary(stepTwoMap);
+	}
+
+
+	public void FillDictionary(TileMap map)
+	{
+		cells = map.GetUsedCells();
+
 		int i;
-		// cells = GetUsedCellsById(1);
+
 		foreach (var c in cells)
 		{
 			Vector2 cellData;
 			cellData =  (Vector2)c;
 			// i is index of the tile
-			i = GetCellv(cellData);
-			// n is name of the tile in a string for reference later
-			string n = TileSet.TileGetName(i);
-			string t;
-			int hIndex;
-			int cIndex;
-			bool b;
+			i = map.GetCellv(cellData);
 
-			// t == n.Contains(tags.grass.ToString()) : t = "grass" ? t = "null";
-			// b = n.Contains(tags.grass.ToString()) : t = "water" ? t = "null";
-			// b = n.Contains(tags.grass.ToString()) : t = "tundra" ? t = "null";
-			// b = n.Contains(tags.grass.ToString()) : t = "charge" ? t = "null";
-			// b = n.Contains(tags.grass.ToString()) : t = "rubble" ? t = "null";
-			// b = n.Contains(tags.grass.ToString()) : t = "water" ? t = "null";
+			string name = map.TileSet.TileGetName(i);
+			int temp;
+			string tag;
 
-			if (n == null)
+			tag = GetTileType(name);
+			temp = GetTemp(tag);
+
+			if (name == null)
 			{
-				n = "empty";
+				name = "empty";
 			}
-			tileDict.Add(k, cellData, n, i, false);
+			tileDict.Add(k, cellData, name, i, tag, temp);
 			k++;
 		}
+	}
+
+
+	/* 
+	absolutely disgusting garbage if else bullshit can't think of a better way to check this
+	returns the tag associated with the tile;
+	will absolutely break and doesn't really work the way it should im sure of it
+	*/
+	public string GetTileType(string n)
+	{
+		string tag = "null";
+		for (int i = 0; i < Enum.GetNames(typeof(tags)).Length; i++)
+		{
+			if(n == tags.grass.ToString())
+			{
+				tag = tags.grass.ToString();
+			}
+			else if (n == tags.desert.ToString())
+			{
+				tag = tags.desert.ToString();
+			}
+			else if (n == tags.tundra.ToString())
+			{
+				tag = tags.tundra.ToString();
+			}
+			else if (n == tags.charge.ToString())
+			{
+				tag = tags.charge.ToString();
+			}
+			else if (n == tags.item.ToString())
+			{
+				tag = tags.item.ToString();
+			}
+			else if (n == tags.water.ToString())
+			{
+				tag = tags.water.ToString();
+			}		
+		}
+		return tag;
+	}
+
+	// returns the tempeture of the tile based on its tag
+
+	public int GetTemp(string tag)
+	{
+		int temp = 0;
+		if (tag == "tundra")
+		{
+			temp = -1;
+		}
+		else if (tag == "desert")
+		{
+			temp = 1;
+		}
+		return temp;
 	}
 
 	/*

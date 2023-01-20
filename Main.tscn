@@ -5,7 +5,7 @@
 [ext_resource path="res://Entities/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Manager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/CameraController.cs" type="Script" id=5]
-[ext_resource path="res://Background.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Background.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node2D"]
 
@@ -14,7 +14,6 @@
 [node name="WorldSpace" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-
 __meta__ = {
 "_edit_group_": true
 }
