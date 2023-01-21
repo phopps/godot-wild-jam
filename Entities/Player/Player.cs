@@ -13,12 +13,18 @@ public class Player : Area2D
 	private Timer movementCooldown;
 	GameManager game;
 
+	AnimatedSprite roverUp;
+	AnimatedSprite roverDown;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		game = (GameManager)GetNode("/root/Main/Manager");
+		roverUp = (AnimatedSprite)GetNode("RoverUp");
+		roverDown = (AnimatedSprite)GetNode("RoverDown");
 		Position = new Vector2(16, 0);
 		movementCooldown = GetNode<Timer>("MovementCooldown");
+
 	}
 
 	public void GetInput()
@@ -50,6 +56,7 @@ public class Player : Area2D
 			if (rotationDirection == 4)
 			{
 				rotationDirection -= 1;
+				
 			}
 			else if (rotationDirection == 3)
 			{
@@ -69,6 +76,7 @@ public class Player : Area2D
 			if (rotationDirection == 1)
 			{
 				rotationDirection += 2;
+				
 			}
 			else
 			{
@@ -78,6 +86,32 @@ public class Player : Area2D
 					rotationDirection = 0;
 				}
 			}
+		}
+		GD.Print(rotationDirection);
+
+		if (rotationDirection == 1)
+		{
+			roverDown.Visible = true;
+			roverUp.Visible = false;
+			roverDown.Scale = new Vector2(1, 1);
+		}
+		else if (rotationDirection == 0)
+		{
+			roverUp.Visible = true;
+			roverDown.Visible = false;
+			roverUp.Scale = new Vector2(1, 1);
+		}
+		else if (rotationDirection == 4)
+		{
+			roverUp.Visible = true;
+			roverDown.Visible = false;
+			roverUp.Scale = new Vector2(-1, 1);
+		}
+		else if (rotationDirection == 3)
+		{
+			roverUp.Visible = false;
+			roverDown.Visible = true;
+			roverDown.Scale = new Vector2(-1, 1);
 		}
 	}
 	public override void _Process(float delta)

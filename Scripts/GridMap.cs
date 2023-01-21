@@ -112,27 +112,27 @@ public class GridMap : TileMap
 		string tag = "null";
 		for (int i = 0; i < Enum.GetNames(typeof(tags)).Length; i++)
 		{
-			if(n == tags.grass.ToString())
+			if(n.Contains(tags.grass.ToString()))
 			{
 				tag = tags.grass.ToString();
 			}
-			else if (n == tags.desert.ToString())
+			else if (n.Contains(tags.desert.ToString()))
 			{
 				tag = tags.desert.ToString();
 			}
-			else if (n == tags.tundra.ToString())
+			else if (n.Contains(tags.tundra.ToString()))
 			{
 				tag = tags.tundra.ToString();
 			}
-			else if (n == tags.charge.ToString())
+			else if (n.Contains(tags.charge.ToString()))
 			{
 				tag = tags.charge.ToString();
 			}
-			else if (n == tags.item.ToString())
+			else if (n.Contains(tags.item.ToString()))
 			{
 				tag = tags.item.ToString();
 			}
-			else if (n == tags.water.ToString())
+			else if (n.Contains(tags.water.ToString()))
 			{
 				tag = tags.water.ToString();
 			}		
@@ -149,7 +149,7 @@ public class GridMap : TileMap
 		{
 			temp = -1;
 		}
-		else if (tag == "desert")
+		else if (tag == "desert" || tag == "water")
 		{
 			temp = 1;
 		}
