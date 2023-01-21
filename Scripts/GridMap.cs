@@ -196,7 +196,7 @@ public class GridMap : TileMap
 
 			if (InCircle(refPosition, node.Value.coord) == false)
 			{
-				SetCellv(node.Value.coord, -1);
+				groundMap.SetCellv(node.Value.coord, -1);
 			}
 		}
 	}
@@ -210,7 +210,7 @@ public class GridMap : TileMap
 		{
 			if (InCircle(refPosition, node.Value.coord) == true)
 			{
-				SetCellv(node.Value.coord, node.Value.index);
+				groundMap.SetCellv(node.Value.coord, node.Value.index);
 				if (game.green == true)
 				{
 					SetGreenTiles(node.Value);

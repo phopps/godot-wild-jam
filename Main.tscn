@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://WorldSpace.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Manager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/CameraController.cs" type="Script" id=5]
 [ext_resource path="res://World/Background.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/UI/TempGauge.png" type="Texture" id=7]
+[ext_resource path="res://Assets/UI/TextLogUI.png" type="Texture" id=8]
+[ext_resource path="res://Assets/UI/ChargeUI.png" type="Texture" id=9]
+[ext_resource path="res://Assets/UI/activeComponentsUI.png" type="Texture" id=10]
 
 [node name="Main" type="Node2D"]
 
@@ -29,3 +33,19 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 5 )
 limiter = 1000.0
 speed = 0.1
+
+[node name="Sprite" type="Sprite" parent="Camera2D"]
+position = Vector2( -166, 108 )
+texture = ExtResource( 8 )
+
+[node name="Sprite2" type="Sprite" parent="Camera2D"]
+position = Vector2( -203, -131 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3" type="Sprite" parent="Camera2D"]
+position = Vector2( -101, -130 )
+texture = ExtResource( 9 )
+
+[node name="Sprite4" type="Sprite" parent="Camera2D"]
+position = Vector2( 210, -46 )
+texture = ExtResource( 10 )
