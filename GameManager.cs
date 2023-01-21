@@ -36,17 +36,17 @@ public class GameManager : Node
 	TileMap map;
 
 	// Called when the node enters the scene tree for the first time.
-	// public override void _Ready()
-	// {
-	// 	map = (GridMap)GetNode("/root/Main/WorldSpace/Node2D/ParentMap");
-	// 	map.Modulate = new Color(light, light, light, 1);
-	// 	time = dayLength / 2;
-	// }
+	public override void _Ready()
+	{
+		map = (GridMap)GetNode("/root/Main/WorldSpace/Node2D/ParentMap");
+		map.Modulate = new Color(light, light, light, 1);
+		time = dayLength / 2;
+	}
 
-	// public override void _Process(float delta)
-	// {
-	// 	DayNightCycle();
-	// }
+	public override void _Process(float delta)
+	{
+		DayNightCycle();
+	}
 
 	public void DayNightCycle()
 	{
