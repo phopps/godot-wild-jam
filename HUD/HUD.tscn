@@ -1,0 +1,176 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HUD/HUD.cs" type="Script" id=1]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="Theme" id=3]
+
+[sub_resource type="Animation" id=2]
+resource_name = "Fadeout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/ScreenFade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="TypewriterTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="MessageDelay" type="Timer" parent="."]
+
+[node name="PartList" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -146.0
+margin_top = 10.0
+margin_right = -7.0
+margin_bottom = 454.0
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Chassis" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 135.0
+margin_bottom = 24.0
+text = "Chassis"
+
+[node name="Motor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 22.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Motor"
+
+[node name="Tires" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 39.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Tires"
+
+[node name="ManipulatorArm" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 56.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Manipulator Arm"
+
+[node name="ManipulatorArm2" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 73.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Manipulator Arm"
+
+[node name="SolarPanels" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 90.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Solar Panels"
+
+[node name="ProximitySensor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 107.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Proximity Sensor"
+
+[node name="Battery" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 124.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Battery"
+
+[node name="TemperatureSensor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 141.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Temperature Sensor"
+
+[node name="CuttingArm" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 158.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Cutting Arm"
+
+[node name="AudioSensor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 175.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Audio Sensor"
+
+[node name="StatusLog_bg" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -820.0
+margin_top = -137.0
+margin_right = -7.0
+margin_bottom = -9.0
+color = Color( 0.356863, 0.356863, 0.356863, 1 )
+
+[node name="Scroll" type="ScrollContainer" parent="StatusLog_bg"]
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 809.0
+margin_bottom = 124.0
+scroll_horizontal_enabled = false
+
+[node name="StatusLog" type="Label" parent="StatusLog_bg/Scroll"]
+margin_right = 83.0
+margin_bottom = 14.0
+theme = SubResource( 1 )
+text = "text text text"
+
+[node name="BatteryLevel" type="ProgressBar" parent="."]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 313.0
+margin_bottom = 29.0
+theme = SubResource( 3 )
+value = 60.0
+
+[node name="HeatLevel" type="ProgressBar" parent="."]
+margin_left = 12.0
+margin_top = 37.0
+margin_right = 313.0
+margin_bottom = 57.0
+value = 50.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fadeout = SubResource( 2 )
+
+[node name="ScreenFade" type="ColorRect" parent="AnimationPlayer"]
+margin_right = 1025.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="Button" type="Button" parent="."]
+visible = false
+margin_left = 638.0
+margin_top = 197.0
+margin_right = 780.0
+margin_bottom = 270.0
+text = "Test"
+
+[connection signal="timeout" from="TypewriterTimer" to="." method="NextChar"]
+[connection signal="timeout" from="MessageDelay" to="." method="NextLog"]
+[connection signal="pressed" from="Button" to="." method="TestButton"]
