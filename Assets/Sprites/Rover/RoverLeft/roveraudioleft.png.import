@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bgtest.png-187707cd641318d3fc00367880f347d5.stex"
+path="res://.import/roveraudioleft.png-9a3aafd38c7017f0957c1d9caffd1eb7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bgtest.png"
-dest_files=[ "res://.import/bgtest.png-187707cd641318d3fc00367880f347d5.stex" ]
+source_file="res://Assets/Sprites/Rover/RoverLeft/roveraudioleft.png"
+dest_files=[ "res://.import/roveraudioleft.png-9a3aafd38c7017f0957c1d9caffd1eb7.stex" ]
 
 [params]
 
