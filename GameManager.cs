@@ -19,6 +19,7 @@ public class GameManager : Node
 	public bool green;
 	public bool orange;
 	public bool blue;
+	public bool violet;
 
 	public int time;
 	[Export]

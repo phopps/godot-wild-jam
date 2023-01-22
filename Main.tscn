@@ -16,13 +16,14 @@
 [node name="WorldSpace" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( -11, -67 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Manager" parent="." instance=ExtResource( 4 )]
 dayLength = 1000
-rate = 0.1
+rate = 0.001
 light = 0.001
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]

@@ -3,7 +3,7 @@ using System;
 
 public class TileDictionary<TileData> : System.Collections.Generic.Dictionary<int, Tile.TileData>
 {
-	public void Add(int key, Vector2 coord, string name, int index, string tag, int temp)
+	public void Add(int key, Vector2 coord, string name, int index, string tag, int temp, int step)
 	{
 		Tile.TileData val;
 		val.coord = coord;
@@ -11,6 +11,7 @@ public class TileDictionary<TileData> : System.Collections.Generic.Dictionary<in
 		val.name = name;
 		val.tag = tag;
 		val.temp = temp;
+		val.step = step;
 		this.Add(key, val);
 	}
 }
@@ -24,6 +25,7 @@ public class Tile : Node2D
 		public int temp;
 		public string name;
 		public string tag;
+		public int step;
 	}
 }
 
