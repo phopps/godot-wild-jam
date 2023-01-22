@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://HUD/HUD.cs" type="Script" id=1]
 
 [sub_resource type="Theme" id=1]
+
+[sub_resource type="Theme" id=3]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Fadeout"
@@ -79,6 +81,41 @@ margin_right = 135.0
 margin_bottom = 41.0
 text = "Solar Panels"
 
+[node name="ProximitySensor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 107.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Proximity Sensor"
+
+[node name="Battery" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 124.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Battery"
+
+[node name="TemperatureSensor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 141.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Temperature Sensor"
+
+[node name="CuttingArm" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 158.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Cutting Arm"
+
+[node name="AudioSensor" type="Label" parent="PartList"]
+margin_left = 5.0
+margin_top = 175.0
+margin_right = 135.0
+margin_bottom = 41.0
+text = "Audio Sensor"
+
 [node name="StatusLog_bg" type="ColorRect" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
@@ -91,8 +128,10 @@ margin_bottom = -9.0
 color = Color( 0.356863, 0.356863, 0.356863, 1 )
 
 [node name="Scroll" type="ScrollContainer" parent="StatusLog_bg"]
-margin_right = 813.0
-margin_bottom = 126.0
+margin_left = 3.0
+margin_top = 4.0
+margin_right = 809.0
+margin_bottom = 124.0
 scroll_horizontal_enabled = false
 
 [node name="StatusLog" type="Label" parent="StatusLog_bg/Scroll"]
@@ -106,6 +145,7 @@ margin_left = 12.0
 margin_top = 9.0
 margin_right = 313.0
 margin_bottom = 29.0
+theme = SubResource( 3 )
 value = 60.0
 
 [node name="HeatLevel" type="ProgressBar" parent="."]
@@ -119,7 +159,6 @@ value = 50.0
 anims/Fadeout = SubResource( 2 )
 
 [node name="ScreenFade" type="ColorRect" parent="AnimationPlayer"]
-visible = false
 margin_right = 1025.0
 margin_bottom = 600.0
 color = Color( 0, 0, 0, 0 )

@@ -49,6 +49,9 @@ public class HUD : CanvasLayer {
     v = scr.GetVScrollbar();
     v.Connect("changed", this, "HandleScroll");
     maxScroll = v.MaxValue;
+
+    //Fadein();
+    GameStartText(); //FIXME: run this whenever the game *actually* starts.
   }
 
   public override void _Process(float delta) {
@@ -68,6 +71,9 @@ public class HUD : CanvasLayer {
   public void DisplayLog(int id) {
     // grab a text entry by id, start displaying it based on typewriter_tm
     // once complete, fire off message_tm
+    if (!sLog_bg.Visible) {
+      sLog_bg.Visible = true;
+    }
     display_q.Enqueue(id);
     if (message_tm.TimeLeft == 0) {
       //no message currently playing. Start playing.
@@ -98,9 +104,47 @@ public class HUD : CanvasLayer {
     }
   }
 
+  private String[] allLogs = {
+    "System Activation.",
+    "Critical system damage detected.",
+    "Auto-repair functionality enabled [n] cycles ago.",
+    "Chronometer malfunction.",
+    "Attempting to establish connection with main server...",
+    "Main server unresponsive.",
+    "Attempting to establish connection with Fleet Command...",
+    "Fleet Command unresponsive.",
+    "External chronometers unreachable.",
+    "Writing to log based on local unit chassis timer.",
+    "Core system restored.",
+    "Motor restored.",
+    "Error. Gear direction change disabled.",
+    "Error. Locomotion systems unable to turn axles.",
+    "Self-repair functionality active.",
+    "Salvage functionality active.",
+    "Prime Directive: Repair GSC Hoplite.",
+    "Secondary Directive: Restore unit functionality in order to enable repairs.",
+    "----",//18
+    "Unable to interact.",//19
+    "Door opened.",//20
+    "Salvage secured.",//21
+    "Manipulator Arm acquired.",//22
+    "Solar Panels acquired.",//23
+    "Proximity Sensor acquired.",//24
+    "Enhanced battery acquired.",//25
+    "Temperature Sensor acquired.",//26
+    "Cutting arm acquired.",//27
+    "Audio Sensor acquired. Please begin calibrations."//28
+  };
+
   public String GetLog(int id) {
     //given an id, return the appropriate string.
-    return "The only thing we have to fear is fear itself...";
+    String log = allLogs[id];
+    
+    if (log != null) {
+      return log;
+    } else {
+      return "Unknown command";
+    }
   }
 
   public void NextChar() {
@@ -154,6 +198,29 @@ public class HUD : CanvasLayer {
       maxScroll = v.MaxValue;
       scr.ScrollVertical = (int)v.MaxValue;
     }
+  }
+
+  public void GameStartText() {
+    //when game is started, add initial data logs to queue. Might be nice to time other things together, but not for v1.
+    DisplayLog(0);
+    DisplayLog(1);
+    DisplayLog(2);
+    DisplayLog(3);
+    DisplayLog(4);
+    DisplayLog(5);
+    DisplayLog(6);
+    DisplayLog(7);
+    DisplayLog(8);
+    DisplayLog(9);
+    DisplayLog(10);
+    DisplayLog(11);
+    DisplayLog(12);
+    DisplayLog(13);
+    DisplayLog(14);
+    DisplayLog(15);
+    DisplayLog(16);
+    DisplayLog(17);
+    DisplayLog(18);
   }
 
 }
