@@ -1,10 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://HUD/HUD.cs" type="Script" id=1]
+[ext_resource path="res://Assets/UI/TextLogUI.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/TempGauge.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/ChargeUI.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/activeComponentsUI.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=6]
 
 [sub_resource type="Theme" id=1]
 
 [sub_resource type="Theme" id=3]
+
+[sub_resource type="Gradient" id=4]
+
+[sub_resource type="GradientTexture2D" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Gradient" id=6]
+
+[sub_resource type="GradientTexture2D" id=7]
+gradient = SubResource( 6 )
+fill_from = Vector2( 0.403, 0 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Fadeout"
@@ -30,14 +46,22 @@ wait_time = 0.1
 
 [node name="MessageDelay" type="Timer" parent="."]
 
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 809.0
+margin_top = 10.0
+margin_right = 1055.0
+margin_bottom = 456.0
+texture = ExtResource( 5 )
+expand = true
+
 [node name="PartList" type="ColorRect" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -146.0
-margin_top = 10.0
-margin_right = -7.0
-margin_bottom = 454.0
-color = Color( 0.356863, 0.356863, 0.356863, 1 )
+margin_left = -163.64
+margin_top = 51.297
+margin_right = -24.64
+margin_bottom = 495.297
+color = Color( 0.356863, 0.356863, 0.356863, 0 )
 
 [node name="Chassis" type="Label" parent="PartList"]
 margin_left = 5.0
@@ -121,44 +145,79 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -820.0
+margin_left = -996.458
 margin_top = -137.0
-margin_right = -7.0
+margin_right = -183.458
 margin_bottom = -9.0
-color = Color( 0.356863, 0.356863, 0.356863, 1 )
+color = Color( 0.317647, 0.317647, 0.317647, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="StatusLog_bg"]
+margin_left = -26.0
+margin_top = -66.0
+margin_right = 490.0
+margin_bottom = 136.0
+texture = ExtResource( 2 )
+expand = true
 
 [node name="Scroll" type="ScrollContainer" parent="StatusLog_bg"]
-margin_left = 3.0
-margin_top = 4.0
-margin_right = 809.0
-margin_bottom = 124.0
+margin_left = 22.0
+margin_top = -39.0
+margin_right = 406.0
+margin_bottom = 97.0
 scroll_horizontal_enabled = false
 
 [node name="StatusLog" type="Label" parent="StatusLog_bg/Scroll"]
-margin_right = 83.0
-margin_bottom = 14.0
+margin_right = 98.0
+margin_bottom = 16.0
 theme = SubResource( 1 )
+custom_fonts/font = ExtResource( 6 )
 text = "text text text"
 
 [node name="BatteryLevel" type="ProgressBar" parent="."]
-margin_left = 12.0
-margin_top = 9.0
-margin_right = 313.0
-margin_bottom = 29.0
+visible = false
+margin_left = 280.0
+margin_top = 17.0
+margin_right = 581.0
+margin_bottom = 37.0
 theme = SubResource( 3 )
 value = 60.0
 
 [node name="HeatLevel" type="ProgressBar" parent="."]
-margin_left = 12.0
-margin_top = 37.0
-margin_right = 313.0
-margin_bottom = 57.0
+visible = false
+margin_left = 16.0
+margin_top = 17.0
+margin_right = 317.0
+margin_bottom = 37.0
 value = 50.0
+
+[node name="BatteryTexture" type="TextureProgress" parent="."]
+margin_left = 280.0
+margin_top = 17.0
+margin_right = 546.0
+margin_bottom = 74.0
+value = 50.0
+texture_over = ExtResource( 4 )
+texture_progress = SubResource( 5 )
+nine_patch_stretch = true
+
+[node name="HeatTexture" type="TextureProgress" parent="."]
+margin_left = 16.0
+margin_top = 17.0
+margin_right = 269.0
+margin_bottom = 82.0
+rect_scale = Vector2( 1, 0.881 )
+rect_clip_content = true
+value = 50.0
+texture_over = ExtResource( 3 )
+texture_progress = SubResource( 7 )
+texture_progress_offset = Vector2( 0, 2.11 )
+nine_patch_stretch = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fadeout = SubResource( 2 )
 
 [node name="ScreenFade" type="ColorRect" parent="AnimationPlayer"]
+visible = false
 margin_right = 1025.0
 margin_bottom = 600.0
 color = Color( 0, 0, 0, 0 )

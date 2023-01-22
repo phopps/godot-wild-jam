@@ -16,8 +16,6 @@ public class GridMap : TileMap
 
 	TileMap groundMap;
 	TileMap sceneryMap;
-	TileMap stepOneMap;
-	TileMap stepTwoMap;
 
 	TileDictionary<Tile.TileData> tileDict = new TileDictionary<Tile.TileData>();
 
@@ -31,7 +29,6 @@ public class GridMap : TileMap
 	public Vector2 cellPosition;
 
 	int k;
-	int e;
 
 	public enum tags
 	{
@@ -57,22 +54,20 @@ public class GridMap : TileMap
 
 		groundMap = (TileMap)GetNode("Ground");
 		sceneryMap = (TileMap)GetNode("Scenery");
-		stepOneMap = (TileMap)GetNode("Step1");
-		stepTwoMap = (TileMap)GetNode("Step2");
 
 		// k is the tile key
 		k = 0;
+		int e;
 		e = 0;
-		FillDictionary(groundMap);
-		FillDictionary(sceneryMap);
-		e++;
-		FillDictionary(stepOneMap);
-		e++;
-		FillDictionary(stepTwoMap);
+					GD.Print(e);
+		FillDictionary(groundMap, e);
+		e = 1;
+					GD.Print(e);
+		FillDictionary(sceneryMap, e);
 	}
 
 
-	public void FillDictionary(TileMap map)
+	public void FillDictionary(TileMap map, int elevation)
 	{
 		cells = map.GetUsedCells();
 
@@ -96,7 +91,7 @@ public class GridMap : TileMap
 			{
 				name = "empty";
 			}
-			tileDict.Add(k, cellData, name, i, tag, temp);
+			tileDict.Add(k, cellData, name, i, tag, temp, elevation);
 			k++;
 		}
 	}
@@ -173,6 +168,22 @@ public class GridMap : TileMap
 			cellSelected = WorldToMap(game.playerPosition);
 			UnSetTiles(cellSelected);
 			SetTiles(cellSelected);
+			SetZIndex(cellSelected);
+	}
+
+	public void SetZIndex(Vector2 refPosition)
+	{
+		foreach (var node in tileDict)
+		{
+			if (node.Value.coord >= refPosition && node.Value.step == 1)
+			{
+				sceneryMap.ZIndex = 0;
+			}
+			else
+			{
+				sceneryMap.ZIndex = 2;
+			}
+		}
 	}
 
 	/*
@@ -193,10 +204,10 @@ public class GridMap : TileMap
 		*/
 		foreach (var node in tileDict)
 		{
-
 			if (InCircle(refPosition, node.Value.coord) == false)
 			{
-				groundMap.SetCellv(node.Value.coord, -1);
+					groundMap.SetCellv(node.Value.coord, -1);
+					sceneryMap.SetCellv(node.Value.coord, -1);
 			}
 		}
 	}
@@ -210,7 +221,17 @@ public class GridMap : TileMap
 		{
 			if (InCircle(refPosition, node.Value.coord) == true)
 			{
-				groundMap.SetCellv(node.Value.coord, node.Value.index);
+				if (node.Value.step == 0)
+				{
+					groundMap.SetCellv(node.Value.coord, node.Value.index);
+				}
+
+				else if (node.Value.step == 1)
+				{
+					sceneryMap.SetCellv(node.Value.coord, node.Value.index);
+				}
+				
+				
 				if (game.green == true)
 				{
 					SetGreenTiles(node.Value);
@@ -222,6 +243,10 @@ public class GridMap : TileMap
 				if (game.orange == true)
 				{
 					SetOrangeTiles(node.Value);
+				}
+				if (game.violet == true)
+				{
+					SetVioletTiles(node.Value);
 				}
 				
 			}
@@ -240,7 +265,8 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}green";
 			tile.index = i;
-			SetCellv(tile.coord, tile.index);
+			groundMap.SetCellv(tile.coord, tile.index);
+			sceneryMap.SetCellv(tile.coord, tile.index);
 		}
 	}
 
@@ -256,7 +282,8 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}orange";
 			tile.index = i;
-			SetCellv(tile.coord, tile.index);
+			groundMap.SetCellv(tile.coord, tile.index);
+			sceneryMap.SetCellv(tile.coord, tile.index);
 		}
 	}
 
@@ -272,7 +299,25 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}blue";
 			tile.index = i;
-			SetCellv(tile.coord, tile.index);
+			groundMap.SetCellv(tile.coord, tile.index);
+			sceneryMap.SetCellv(tile.coord, tile.index);
+		}
+	}
+
+	public void SetVioletTiles(Tile.TileData tile)
+	{
+		int i = TileSet.FindTileByName($"{tile.name}violet");
+
+		if (tile.name.Contains("violet"))
+		{
+			return;
+		}
+		else if (1 <= i && i <= 100)
+		{
+			tile.name = $"{tile.name}violet";
+			tile.index = i;
+			groundMap.SetCellv(tile.coord, tile.index);
+			sceneryMap.SetCellv(tile.coord, tile.index);
 		}
 	}
 

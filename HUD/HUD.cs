@@ -14,8 +14,8 @@ public class HUD : CanvasLayer {
   private ColorRect partList;
   private ColorRect sLog_bg;
   private Label sLog;
-  private ProgressBar battery;
-  private ProgressBar heat;
+  private TextureProgress battery;
+  private TextureProgress heat;
   private AnimationPlayer anim;
   private bool isTyping = false;
   private float gameTimer = 0;
@@ -31,8 +31,8 @@ public class HUD : CanvasLayer {
     partList = GetNode<ColorRect>("PartList");
     sLog_bg = GetNode<ColorRect>("StatusLog_bg");
     sLog = sLog_bg.GetNode<Label>("Scroll/StatusLog");
-    battery = GetNode<ProgressBar>("BatteryLevel");
-    heat = GetNode<ProgressBar>("HeatLevel");
+    battery = GetNode<TextureProgress>("BatteryTexture");
+    heat = GetNode<TextureProgress>("HeatTexture");
     anim = GetNode<AnimationPlayer>("AnimationPlayer");
 
     //clear editor data / hide displays to start.
