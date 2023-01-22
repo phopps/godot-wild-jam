@@ -64,6 +64,9 @@ public class GridMap : TileMap
 		e = 1;
 					GD.Print(e);
 		FillDictionary(sceneryMap, e);
+
+		game.tileDict = tileDict;
+		game.visionRange = visionRange;
 	}
 
 
@@ -91,7 +94,7 @@ public class GridMap : TileMap
 			{
 				name = "empty";
 			}
-			tileDict.Add(k, cellData, name, i, tag, temp, elevation);
+			tileDict.Add(k, cellData, name, i, tag, temp, elevation, false);
 			k++;
 		}
 	}
@@ -169,6 +172,10 @@ public class GridMap : TileMap
 			UnSetTiles(cellSelected);
 			SetTiles(cellSelected);
 			SetZIndex(cellSelected);
+
+			game.tileDict = tileDict;
+			game.refPosition = cellSelected;
+			visionRange = game.visionRange;
 	}
 
 	public void SetZIndex(Vector2 refPosition)
@@ -204,6 +211,10 @@ public class GridMap : TileMap
 		*/
 		foreach (var node in tileDict)
 		{
+			if (node.Value.used == true)
+			{
+				sceneryMap.SetCellv(node.Value.coord, -1);
+			}
 			if (InCircle(refPosition, node.Value.coord) == false)
 			{
 					groundMap.SetCellv(node.Value.coord, -1);
@@ -226,7 +237,7 @@ public class GridMap : TileMap
 					groundMap.SetCellv(node.Value.coord, node.Value.index);
 				}
 
-				else if (node.Value.step == 1)
+				else if (node.Value.step == 1 && node.Value.used == false)
 				{
 					sceneryMap.SetCellv(node.Value.coord, node.Value.index);
 				}
@@ -265,8 +276,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}green";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -282,8 +300,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}orange";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -299,8 +324,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}blue";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -316,8 +348,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}violet";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -365,23 +404,5 @@ public class GridMap : TileMap
 	{
 		int index = (int) Mathf.Round(cell.x += size.x * cell.y);
 		return index;
-	}
-
-
-
-	public override void _Input(InputEvent inputEvent)
-	{
-		if (Input.IsActionPressed("ui_accept"))
-		{
-			game.orange = true;
-			game.blue = true;
-			game.green = true;
-		}
-		else
-		{
-			game.blue = false;
-			game.orange = false;
-			game.green = false;
-		}
 	}
 }

@@ -13,15 +13,50 @@ public class Player : Area2D
 	private Timer movementCooldown;
 	GameManager game;
 
+	TileMap sceneryMap;
+
 	AnimatedSprite roverUp;
 	AnimatedSprite roverDown;
+
+	AnimatedSprite optics;
+	AnimatedSprite charge;
+	AnimatedSprite temp;
+	AnimatedSprite opticsDown;
+	AnimatedSprite chargeDown;
+	AnimatedSprite tempDown;
+
+	HUD HUD;
+
+	bool hasOptics = false;
+	bool hasTemp = false;
+	bool hasCharge = false;
+
+
+	float heat = 50;
+	float maxHeat = 100;
+	float battery = 100;
+	float minBattery = 0;
+	float maxBattery = 100;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		game = (GameManager)GetNode("/root/Main/Manager");
+		HUD = (HUD)GetNode("/root/Main/Camera2D/HUD");
+		
 		roverUp = (AnimatedSprite)GetNode("RoverUp");
 		roverDown = (AnimatedSprite)GetNode("RoverDown");
+
+		optics = (AnimatedSprite)GetNode("RoverUp/Optics");
+		opticsDown = (AnimatedSprite)GetNode("RoverDown/OpticsDown");
+		charge = (AnimatedSprite)GetNode("RoverUp/Charge");
+		chargeDown = (AnimatedSprite)GetNode("RoverDown/ChargeDown");
+		temp = (AnimatedSprite)GetNode("RoverUp/Temp");
+		tempDown = (AnimatedSprite)GetNode("RoverDown/TempDown");
+
+		sceneryMap = (TileMap)GetNode("/root/Main/WorldSpace/Node2D/ParentMap/Scenery");
+
+
 		Position = new Vector2(16, 0);
 		movementCooldown = GetNode<Timer>("MovementCooldown");
 
@@ -38,6 +73,8 @@ public class Player : Area2D
 				Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
 				// start cooldown
 				movementCooldown.Start();
+				GetCurrentTile();
+				DrainBattery();
 			}
 			else if (Input.IsActionPressed("down"))
 			{
@@ -45,6 +82,8 @@ public class Player : Area2D
 				Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
 				// start cooldown
 				movementCooldown.Start();
+				GetCurrentTile();
+				DrainBattery();
 			}
 		}
 	}
@@ -87,7 +126,6 @@ public class Player : Area2D
 				}
 			}
 		}
-		GD.Print(rotationDirection);
 
 		if (rotationDirection == 1)
 		{
@@ -113,11 +151,112 @@ public class Player : Area2D
 			roverDown.Visible = true;
 			roverDown.Scale = new Vector2(-1, 1);
 		}
+		
 	}
 	public override void _Process(float delta)
 	{
 		game.playerPosition = GlobalPosition;
 		GetInput();
+	}
+
+
+	public void DrainBattery()
+	{
+		if (battery >= minBattery)
+		{
+			battery = battery -= 2;
+			HUD.UpdateBattery(battery);
+		}
+		else
+		{
+			// die
+		}
+	}
+
+	public void SetTile(Tile.TileData tile)
+	{
+		tile.used = true;
+	}
+
+
+	public void GetCurrentTile()
+	{
+		foreach (var node in game.tileDict)
+		{
+			if (game.refPosition == node.Value.coord - new Vector2(1,1) && node.Value.step == 1)
+			{
+				GD.Print(node.Value.tag);
+				if (node.Value.tag == "item" && hasOptics == false && node.Value.used == false)
+				{
+					hasOptics = true;
+					optics.Visible = true;
+					opticsDown.Visible = true;
+					game.visionRange = 5;
+					game.green = true;
+					SetTile(node.Value);
+					return;
+				}
+				if (node.Value.tag == "item" && hasCharge == false)
+				{
+					hasCharge = true;
+					charge.Visible = true;
+					chargeDown.Visible = true;
+					HUD.battery.Visible = true;
+					game.violet = true;
+					SetTile(node.Value);
+					return;
+				}
+				if (node.Value.tag == "item" && hasTemp == false)
+				{
+					hasTemp = true;
+					temp.Visible = true;
+					tempDown.Visible = true;
+					HUD.heat.Visible = true;
+					game.orange = true;
+					game.blue = true;
+					SetTile(node.Value);
+					return;
+				}
+				if (node.Value.tag == "charge")
+				{
+					battery = battery += (maxBattery - battery);
+					if (battery >= maxBattery)
+					{
+						battery = maxBattery;
+						HUD.UpdateBattery(battery);
+					}
+					else
+					{
+						HUD.UpdateBattery(battery);
+					}
+				}
+			}
+
+			else if (game.refPosition == node.Value.coord && node.Value.step == 0)
+			{
+				if (node.Value.tag == "desert")
+				{
+					heat = heat += 2;
+					HUD.UpdateHeat(heat);
+				}
+				if (node.Value.tag == "tundra")
+				{
+					heat = heat -= 2;
+					HUD.UpdateHeat(heat);
+				}
+				if (node.Value.tag == "grass" && heat >= 51 || node.Value.tag == "null" && heat >= 51)
+				{
+					heat = heat -= 2;
+					HUD.UpdateHeat(heat);
+					if (heat <= 50)
+					{
+						heat = heat = 50;
+						HUD.UpdateHeat(heat);
+					}
+				}
+
+			}
+		}
 	}
  }
 	

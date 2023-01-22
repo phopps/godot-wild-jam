@@ -16,6 +16,12 @@ public class GameManager : Node
 	public Vector2 selectedTile;
 	public Vector2 playerPosition;
 
+	public TileDictionary<Tile.TileData> tileDict = new TileDictionary<Tile.TileData>();
+
+	public Vector2 refPosition;
+
+	public int visionRange;
+
 	public bool green;
 	public bool orange;
 	public bool blue;
