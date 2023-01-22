@@ -174,6 +174,7 @@ custom_fonts/font = ExtResource( 6 )
 text = "text text text"
 
 [node name="BatteryLevel" type="ProgressBar" parent="."]
+visible = false
 margin_left = 280.0
 margin_top = 17.0
 margin_right = 581.0
@@ -182,6 +183,7 @@ theme = SubResource( 3 )
 value = 60.0
 
 [node name="HeatLevel" type="ProgressBar" parent="."]
+visible = false
 margin_left = 16.0
 margin_top = 17.0
 margin_right = 317.0
@@ -192,7 +194,7 @@ value = 50.0
 margin_left = 280.0
 margin_top = 17.0
 margin_right = 546.0
-margin_bottom = 79.0
+margin_bottom = 74.0
 value = 50.0
 texture_over = ExtResource( 4 )
 texture_progress = SubResource( 5 )
@@ -202,7 +204,7 @@ nine_patch_stretch = true
 margin_left = 16.0
 margin_top = 17.0
 margin_right = 269.0
-margin_bottom = 90.0
+margin_bottom = 82.0
 rect_scale = Vector2( 1, 0.881 )
 rect_clip_content = true
 value = 50.0
