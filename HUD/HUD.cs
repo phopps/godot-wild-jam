@@ -14,8 +14,8 @@ public class HUD : CanvasLayer {
   private ColorRect partList;
   private ColorRect sLog_bg;
   private Label sLog;
-  private TextureProgress battery;
-  private TextureProgress heat;
+  public TextureProgress battery;
+  public TextureProgress heat;
   private AnimationPlayer anim;
   private bool isTyping = false;
   private float gameTimer = 0;

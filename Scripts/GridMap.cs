@@ -64,6 +64,9 @@ public class GridMap : TileMap
 		e = 1;
 					GD.Print(e);
 		FillDictionary(sceneryMap, e);
+
+		game.tileDict = tileDict;
+		game.visionRange = visionRange;
 	}
 
 
@@ -91,7 +94,7 @@ public class GridMap : TileMap
 			{
 				name = "empty";
 			}
-			tileDict.Add(k, cellData, name, i, tag, temp, elevation);
+			tileDict.Add(k, cellData, name, i, tag, temp, elevation, false);
 			k++;
 		}
 	}
@@ -169,6 +172,10 @@ public class GridMap : TileMap
 			UnSetTiles(cellSelected);
 			SetTiles(cellSelected);
 			SetZIndex(cellSelected);
+
+			game.tileDict = tileDict;
+			game.refPosition = cellSelected;
+			visionRange = game.visionRange;
 	}
 
 	public void SetZIndex(Vector2 refPosition)
@@ -204,6 +211,10 @@ public class GridMap : TileMap
 		*/
 		foreach (var node in tileDict)
 		{
+			if (node.Value.used == true)
+			{
+				sceneryMap.SetCellv(node.Value.coord, -1);
+			}
 			if (InCircle(refPosition, node.Value.coord) == false)
 			{
 					groundMap.SetCellv(node.Value.coord, -1);
@@ -226,7 +237,7 @@ public class GridMap : TileMap
 					groundMap.SetCellv(node.Value.coord, node.Value.index);
 				}
 
-				else if (node.Value.step == 1)
+				else if (node.Value.step == 1 && node.Value.used == false)
 				{
 					sceneryMap.SetCellv(node.Value.coord, node.Value.index);
 				}
