@@ -1,6 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://HUD/MainMenu.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Menu/Space.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Menu/Planet.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu/ShipFull.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/Title.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Intro"
@@ -236,7 +240,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "PlanetLoop"
-length = 16.0
+length = 30.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Background/planet:rect_rotation")
@@ -245,7 +249,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 16 ),
+"times": PoolRealArray( 0, 30 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 360.0 ]
@@ -293,24 +297,47 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="TextureRect" type="TextureRect" parent="Background"]
+margin_right = 1027.0
+margin_bottom = 598.0
+texture = ExtResource( 2 )
+expand = true
+
 [node name="planet" type="ColorRect" parent="Background"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -270.0
-margin_top = -235.0
-margin_right = 30.0
-margin_bottom = 65.0
+anchor_left = 0.883
+anchor_top = 0.858
+anchor_right = 0.883
+anchor_bottom = 0.858
+margin_left = -149.958
+margin_top = -149.8
+margin_right = 150.042
+margin_bottom = 150.2
 rect_pivot_offset = Vector2( 150, 150 )
-color = Color( 0.184314, 0.643137, 0.0156863, 1 )
+color = Color( 0.184314, 0.643137, 0.0156863, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="Background/planet"]
+anchor_left = 0.44
+anchor_top = 0.41
+anchor_right = 0.44
+anchor_bottom = 0.41
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 3 )
+expand = true
 
 [node name="spaceship" type="ColorRect" parent="Background"]
 margin_left = 261.0
 margin_top = 279.0
 margin_right = 367.0
 margin_bottom = 319.0
-color = Color( 0.231373, 0.243137, 0.996078, 1 )
+color = Color( 0.231373, 0.243137, 0.996078, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="Background/spaceship"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
 
 [node name="LogoSprite" type="ColorRect" parent="Background"]
 modulate = Color( 1, 1, 1, 0 )
@@ -320,6 +347,19 @@ margin_left = -126.0
 margin_top = 66.0
 margin_right = 133.0
 margin_bottom = 180.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="Background/LogoSprite"]
+anchor_left = 0.544
+anchor_top = 0.763
+anchor_right = 0.544
+anchor_bottom = 0.763
+margin_left = -149.896
+margin_top = -131.982
+margin_right = 150.104
+margin_bottom = 132.018
+texture = ExtResource( 5 )
+expand = true
 
 [node name="MainAnimator" type="AnimationPlayer" parent="."]
 anims/Intro = SubResource( 1 )
@@ -410,8 +450,8 @@ margin_bottom = 363.0
 theme = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 11 )
-text = "Lead Artist, Character Designer
-Zack Burcarz"
+text = "Lead Artist, Character Designer, Programmer
+Zachary Burcar"
 align = 1
 
 [node name="Bryant" type="Label" parent="Credits"]

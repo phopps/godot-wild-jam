@@ -21,6 +21,9 @@ __meta__ = {
 }
 
 [node name="Manager" parent="." instance=ExtResource( 4 )]
+dayLength = 1000
+rate = 0.1
+light = 0.001
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 9 )
