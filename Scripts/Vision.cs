@@ -17,8 +17,4 @@ public class Vision : Node
 		
 	}
 	
-	public void SetCell(Vector2 value)
-	{
-		cell = grid.GridClamp(value);
-	}
 }
