@@ -265,8 +265,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}green";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -282,8 +289,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}orange";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -299,8 +313,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}blue";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -316,8 +337,15 @@ public class GridMap : TileMap
 		{
 			tile.name = $"{tile.name}violet";
 			tile.index = i;
-			groundMap.SetCellv(tile.coord, tile.index);
-			sceneryMap.SetCellv(tile.coord, tile.index);
+				if (tile.step == 0)
+				{
+					groundMap.SetCellv(tile.coord, tile.index);
+				}
+
+				else if (tile.step == 1)
+				{
+					sceneryMap.SetCellv(tile.coord, tile.index);
+				}
 		}
 	}
 
@@ -365,23 +393,5 @@ public class GridMap : TileMap
 	{
 		int index = (int) Mathf.Round(cell.x += size.x * cell.y);
 		return index;
-	}
-
-
-
-	public override void _Input(InputEvent inputEvent)
-	{
-		if (Input.IsActionPressed("ui_accept"))
-		{
-			game.orange = true;
-			game.blue = true;
-			game.green = true;
-		}
-		else
-		{
-			game.blue = false;
-			game.orange = false;
-			game.green = false;
-		}
 	}
 }
