@@ -3,8 +3,6 @@ using System;
 
 public class Generation : TileMap
 {
-
-
 	Vector2 cellSize = new Vector2(32, 16);
 	float mapSize = 1024;
 	float width;
