@@ -164,6 +164,7 @@ margin_bottom = 600.0
 color = Color( 0, 0, 0, 0 )
 
 [node name="Button" type="Button" parent="."]
+visible = false
 margin_left = 638.0
 margin_top = 197.0
 margin_right = 780.0
