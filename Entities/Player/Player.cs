@@ -43,7 +43,7 @@ public class Player : Area2D
 	{
 		game = (GameManager)GetNode("/root/Main/Manager");
 		HUD = (HUD)GetNode("/root/Main/Camera2D/HUD");
-		
+
 		roverUp = (AnimatedSprite)GetNode("RoverUp");
 		roverDown = (AnimatedSprite)GetNode("RoverDown");
 
@@ -64,9 +64,11 @@ public class Player : Area2D
 
 	public void GetInput()
 	{
+    // bool canMoveForward = ...
 		if (movementCooldown.IsStopped())
 		{
 			velocity = new Vector2(); // (0, 0)
+      // up && canMoveForward
 			if (Input.IsActionPressed("up"))
 			{
 				velocity = new Vector2(1, -1) * tileSize / 2;
@@ -95,7 +97,7 @@ public class Player : Area2D
 			if (rotationDirection == 4)
 			{
 				rotationDirection -= 1;
-				
+
 			}
 			else if (rotationDirection == 3)
 			{
@@ -115,7 +117,7 @@ public class Player : Area2D
 			if (rotationDirection == 1)
 			{
 				rotationDirection += 2;
-				
+
 			}
 			else
 			{
@@ -151,11 +153,12 @@ public class Player : Area2D
 			roverDown.Visible = true;
 			roverDown.Scale = new Vector2(-1, 1);
 		}
-		
+    // GD.Print("rotation direction = " + rotationDirection);
 	}
 	public override void _Process(float delta)
 	{
 		game.playerPosition = GlobalPosition;
+    GD.Print("player position = " + game.playerPosition);
 		GetInput();
 	}
 
@@ -185,7 +188,8 @@ public class Player : Area2D
 		{
 			if (game.refPosition == node.Value.coord - new Vector2(1,1) && node.Value.step == 1)
 			{
-				GD.Print(node.Value.tag);
+        GD.Print("current tile key = " + node.Key);
+        GD.Print("current tile tag = " + node.Value.tag);
 				if (node.Value.tag == "item" && hasOptics == false && node.Value.used == false)
 				{
 					hasOptics = true;
@@ -258,5 +262,7 @@ public class Player : Area2D
 			}
 		}
 	}
+
+
  }
-	
+
