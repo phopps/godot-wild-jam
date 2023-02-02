@@ -436,11 +436,11 @@ margin_bottom = 237.0
 theme = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 11 )
-text = "Lead Game Programmer
+text = "Game Programmer
 Patrick Hopps"
 align = 1
 
-[node name="Zack" type="Label" parent="Credits"]
+[node name="Zachary" type="Label" parent="Credits"]
 anchor_left = 0.502
 anchor_right = 0.502
 margin_left = -386.55
@@ -450,7 +450,7 @@ margin_bottom = 363.0
 theme = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 11 )
-text = "Lead Artist, Character Designer, Programmer
+text = "Lead Programmer, Artist, Character Designer
 Zachary Burcar"
 align = 1
 

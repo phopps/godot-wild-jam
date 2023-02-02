@@ -158,7 +158,7 @@ public class Player : Area2D
 	public override void _Process(float delta)
 	{
 		game.playerPosition = GlobalPosition;
-    GD.Print("player position = " + game.playerPosition);
+    // GD.Print("player position = " + game.playerPosition);
 		GetInput();
 	}
 
