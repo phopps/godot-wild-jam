@@ -11,27 +11,10 @@ config_version=4
 [application]
 
 config/name="Mauve: Prime Directive"
-config/description="A robot is the sole survivor of a crash on an unknown planet.
-
-Mauve is a tile-based adventure game where you play a M.A.U.V.E, a Magnetized Autonomous Utility Vehicle Explorer. Search rubble piles to regain lost parts of your chassis.
-
-Each new part lets you see more of the world around and in different ways. Allowing you to see farther, perceive color, tempature and more.
-
-It is very unfinished and you cannot win or lose! drive over rubble piles to gain new parts, drive over charge stations to recharge your rover. Nothing happens when you overheat or run out of battery currently.
-
-Controls :
-
-W - Move Forward
-
-S - Move back
-
-A - Turn Left
-
-D - Turn Right
-
-Created by: burcarz, phopps, brt9029, thaewyn."
+config/description="A robot is the sole survivor of a crash on an unknown planet. Mauve is an isometric tile-based adventure game where you play a M.A.U.V.E, a Magnetized Autonomous Utility Vehicle Explorer. Search rubble piles to regain lost parts of your chassis. Each new part lets you see more of the world around and in different ways - allowing you to see farther, perceive color, tempature and more. Drive over rubble piles to gain new parts, and drive over charge stations to recharge your rover. Controls : W - Move Forward, S - Move back, A - Turn Left, D - Turn Right. Created by: burcarz, phopps, brt9029, thaewyn."
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://Assets/UI/splash.png"
+boot_splash/bg_color=Color( 0.0588235, 0.0588235, 0.0588235, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
@@ -127,4 +110,5 @@ quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.0588235, 0.0588235, 0.0588235, 1 )
 environment/default_environment="res://default_env.tres"
