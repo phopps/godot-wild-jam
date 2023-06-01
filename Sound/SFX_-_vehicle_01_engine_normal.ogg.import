@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_vehicle_01_engine_normal.ogg-7868408bf2720b2151f51a5d281e31f1.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_vehicle_01_engine_normal.ogg"
+dest_files=[ "res://.import/SFX_-_vehicle_01_engine_normal.ogg-7868408bf2720b2151f51a5d281e31f1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

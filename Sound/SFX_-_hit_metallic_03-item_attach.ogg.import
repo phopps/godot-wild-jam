@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_hit_metallic_03-item_attach.ogg-d37e6c9d2b9ec86a9e5eda0d7bc64b3e.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_hit_metallic_03-item_attach.ogg"
+dest_files=[ "res://.import/SFX_-_hit_metallic_03-item_attach.ogg-d37e6c9d2b9ec86a9e5eda0d7bc64b3e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

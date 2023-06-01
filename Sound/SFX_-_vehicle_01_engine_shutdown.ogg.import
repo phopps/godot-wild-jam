@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_vehicle_01_engine_shutdown.ogg-f99d364ab1731d0b5c46f3353ec952bb.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_vehicle_01_engine_shutdown.ogg"
+dest_files=[ "res://.import/SFX_-_vehicle_01_engine_shutdown.ogg-f99d364ab1731d0b5c46f3353ec952bb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
