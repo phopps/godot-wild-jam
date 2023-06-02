@@ -4,11 +4,11 @@ using System;
 public class GridMap : TileMap
 {
 	/*
-	
+
 	TILEMAP EXTENSION DESIGNED TO USE TILE VALUES
-	
+
 	- burcarz
-	
+
 	*/
 
 	public Godot.Collections.Array cells;
@@ -38,6 +38,7 @@ public class GridMap : TileMap
 		charge,
 		item,
 		water,
+    wall,
 		empty
 	}
 
@@ -48,7 +49,7 @@ public class GridMap : TileMap
 	public override void _Ready()
 	{
 		// tags = ["grass", "desert", "tundra", "charge", "rubble", "water"];
-		
+
 		cellHalf = cellSize / 2;
 		game = (GameManager)GetNode("/root/Main/Manager");
 
@@ -86,21 +87,29 @@ public class GridMap : TileMap
 			string name = map.TileSet.TileGetName(i);
 			int temp;
 			string tag;
+      bool traversable;
 
 			tag = GetTileType(name);
 			temp = GetTemp(tag);
+      traversable = true;
 
 			if (name == null)
 			{
 				name = "empty";
 			}
-			tileDict.Add(k, cellData, name, i, tag, temp, elevation, false);
+
+      if (tag == "water" || tag == "wall")
+      {
+        traversable = false;
+      }
+
+			tileDict.Add(k, cellData, name, i, tag, temp, elevation, false, traversable);
 			k++;
 		}
 	}
 
 
-	/* 
+	/*
 	absolutely disgusting garbage if else bullshit can't think of a better way to check this
 	returns the tag associated with the tile;
 	will absolutely break and doesn't really work the way it should im sure of it
@@ -108,6 +117,9 @@ public class GridMap : TileMap
 	public string GetTileType(string n)
 	{
 		string tag = "null";
+    string cont = "container";
+    string ship = "ship";
+
 		for (int i = 0; i < Enum.GetNames(typeof(tags)).Length; i++)
 		{
 			if(n.Contains(tags.grass.ToString()))
@@ -133,7 +145,11 @@ public class GridMap : TileMap
 			else if (n.Contains(tags.water.ToString()))
 			{
 				tag = tags.water.ToString();
-			}		
+			}
+      else if (n.Contains(tags.wall.ToString()) || n.Contains(cont) || n.Contains(ship))
+      {
+        tag = tags.wall.ToString();
+      }
 		}
 		return tag;
 	}
@@ -241,8 +257,8 @@ public class GridMap : TileMap
 				{
 					sceneryMap.SetCellv(node.Value.coord, node.Value.index);
 				}
-				
-				
+
+
 				if (game.green == true)
 				{
 					SetGreenTiles(node.Value);
@@ -259,7 +275,7 @@ public class GridMap : TileMap
 				{
 					SetVioletTiles(node.Value);
 				}
-				
+
 			}
 		}
 	}
@@ -372,7 +388,7 @@ public class GridMap : TileMap
 	public Vector2 CalculateGridCoordinates(Vector2 mapPosition)
 	{
 		Vector2 gridCoordinates = (mapPosition /  cellSize);
-		
+
 		// may need to use MATH FLOOR HERE
 		// return new Vector2(Mathf.Floor(gridCoordinates.x), Mathf.Floor(gridCoordinates.y));
 		return gridCoordinates;
@@ -387,7 +403,7 @@ public class GridMap : TileMap
 		bool outOfBounds = cellCoordinates.x >= 0 && cellCoordinates.x < size.x;
 		return outOfBounds && cellCoordinates.y >= 0 && cellCoordinates.y < size.y;
 	}
-	/* 
+	/*
 
 	clamp function returns x and y values smaller than the size of the grid
 
