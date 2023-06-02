@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_hit_basic_03-wallbump.ogg-40788b28843bf2061e256e7b28328df1.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_hit_basic_03-wallbump.ogg"
+dest_files=[ "res://.import/SFX_-_hit_basic_03-wallbump.ogg-40788b28843bf2061e256e7b28328df1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

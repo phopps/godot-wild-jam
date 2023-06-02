@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://WorldSpace.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=2]
@@ -8,6 +8,25 @@
 [ext_resource path="res://World/Background.tscn" type="PackedScene" id=6]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://HUD/MainMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sound/Action_-_Dystopian_Opening.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Sound/Menu_-_Combat_Command-mainmenu.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Sound/SFX_-_alarm_09-warning.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Sound/SFX_-_beep_07-menu_down.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Sound/SFX_-_negative_07-warning.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Sound/SFX_-_coins_multiple_03-big_success.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Sound/SFX_-_hit_basic_03-wallbump.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Sound/SFX_-_beep_04-log_text_entry.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sound/SFX_-_hit_metallic_03-item_attach.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Sound/SFX_-_magic_spell_03-energy_recharge.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Sound/SFX_-_negative_04-illegal_move.ogg" type="AudioStream" id=19]
+[ext_resource path="res://Sound/SFX_-_power_down_01.ogg" type="AudioStream" id=20]
+[ext_resource path="res://Sound/Action_-_Future_Zone.ogg" type="AudioStream" id=21]
+[ext_resource path="res://Sound/SFX_-_beep_06-menu_up.ogg" type="AudioStream" id=22]
+[ext_resource path="res://Sound/SFX_-_vehicle_01_engine_normal.ogg" type="AudioStream" id=23]
+[ext_resource path="res://Sound/SFX_-_vehicle_01_engine_fast.ogg" type="AudioStream" id=24]
+[ext_resource path="res://Sound/SFX_-_vehicle_01_engine_rev.ogg" type="AudioStream" id=25]
+[ext_resource path="res://Sound/SFX_-_vehicle_01_engine_shutdown.ogg" type="AudioStream" id=26]
+[ext_resource path="res://Sound/SFX_-_vehicle_01_engine_idle.ogg" type="AudioStream" id=27]
 
 [node name="Main" type="Node2D"]
 
@@ -37,3 +56,64 @@ speed = 0.1
 [node name="HUD" parent="Camera2D" instance=ExtResource( 7 )]
 
 [node name="MainMenu" parent="Camera2D" instance=ExtResource( 8 )]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Credits" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 9 )
+
+[node name="Level" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 21 )
+
+[node name="MainMenu" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 10 )
+
+[node name="WarningAlarm" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 11 )
+
+[node name="LogTextEntry" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 16 )
+
+[node name="MenuUp" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 22 )
+volume_db = -5.0
+
+[node name="MenuDown" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 12 )
+volume_db = -5.0
+
+[node name="BigSuccess" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 14 )
+
+[node name="WallBump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 15 )
+
+[node name="ItemAttach" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 17 )
+
+[node name="EnergyRecharge" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 18 )
+
+[node name="IllegalMove" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 19 )
+
+[node name="WarningUrgent" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 13 )
+
+[node name="PowerDown" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 20 )
+
+[node name="EngineFast" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 24 )
+
+[node name="EngineIdle" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 27 )
+
+[node name="EngineNormal" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 23 )
+
+[node name="EngineRev" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 25 )
+
+[node name="EngineShutdown" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 26 )

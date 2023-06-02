@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_negative_04-illegal_move.ogg-ed3bd6f0c182119cba098d5833ca475d.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_negative_04-illegal_move.ogg"
+dest_files=[ "res://.import/SFX_-_negative_04-illegal_move.ogg-ed3bd6f0c182119cba098d5833ca475d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

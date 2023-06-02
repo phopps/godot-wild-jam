@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Action_-_Dystopian_Opening.ogg-9f2901cbf0b52b10b93eb8ac243749c0.oggstr"
+
+[deps]
+
+source_file="res://Sound/Action_-_Dystopian_Opening.ogg"
+dest_files=[ "res://.import/Action_-_Dystopian_Opening.ogg-9f2901cbf0b52b10b93eb8ac243749c0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

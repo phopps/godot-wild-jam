@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_coins_multiple_03-big_success.ogg-d38224deb0f8654d527413809a54bb05.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_coins_multiple_03-big_success.ogg"
+dest_files=[ "res://.import/SFX_-_coins_multiple_03-big_success.ogg-d38224deb0f8654d527413809a54bb05.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
