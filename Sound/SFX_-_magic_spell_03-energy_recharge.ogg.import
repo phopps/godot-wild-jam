@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SFX_-_magic_spell_03-energy_recharge.ogg-7d7046e19cbe86ecb43d8c2f23cb9e34.oggstr"
+
+[deps]
+
+source_file="res://Sound/SFX_-_magic_spell_03-energy_recharge.ogg"
+dest_files=[ "res://.import/SFX_-_magic_spell_03-energy_recharge.ogg-7d7046e19cbe86ecb43d8c2f23cb9e34.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
