@@ -9,6 +9,7 @@ public class MainMenu : CanvasLayer
     private AudioStreamPlayer audioLevel;
     private AudioStreamPlayer audioMenuUp;
     private AudioStreamPlayer audioMenuDown;
+    private AudioStreamPlayer audioEngineIdle;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -17,6 +18,7 @@ public class MainMenu : CanvasLayer
         audioLevel = GetNode<AudioStreamPlayer>("/root/Main/Audio/Level");
         audioMenuUp = GetNode<AudioStreamPlayer>("/root/Main/Audio/MenuUp");
         audioMenuDown = GetNode<AudioStreamPlayer>("/root/Main/Audio/MenuDown");
+        audioEngineIdle = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineIdle");
         audioMainMenu.Play();
         anim = GetNode<AnimationPlayer>("MainAnimator");
         anim.Play("Intro");
@@ -57,6 +59,7 @@ public class MainMenu : CanvasLayer
             Hide();
             audioMainMenu.Stop();
             audioLevel.Play();
+            audioEngineIdle.Play();
         }
     }
 }

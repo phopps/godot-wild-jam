@@ -26,13 +26,20 @@ public class Player : Area2D
     float battery = 100;
     float minBattery = 0;
     float maxBattery = 100;
-    // private AudioStreamPlayer audioLevel;
+    // private AudioStreamPlayer audioEngineIdle;
+    // private AudioStreamPlayer audioEngineNormal;
+    // private AudioStreamPlayer audioEngineShutdown;
+    // private AudioStreamPlayer audioItemAttach;
+    // private AudioStreamPlayer audioEnergyRecharge;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        // AudioStreamPlayer audioLevel = GetNode<AudioStreamPlayer>("/root/Main/Audio/Level");
-        // audioLevel.Play();
+        // audioEngineIdle = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineIdle");
+        // audioEngineNormal = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineNormal");
+        // audioEngineShutdown = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineShutdown");
+        // audioItemAttach = GetNode<AudioStreamPlayer>("/root/Main/Audio/ItemAttach");
+        // audioEnergyRecharge = GetNode<AudioStreamPlayer>("/root/Main/Audio/EnergyRecharge");
         game = (GameManager)GetNode("/root/Main/Manager");
         HUD = (HUD)GetNode("/root/Main/Camera2D/HUD");
         roverUp = (AnimatedSprite)GetNode("RoverUp");
@@ -56,19 +63,21 @@ public class Player : Area2D
             velocity = new Vector2(); // (0, 0)
             if (Input.IsActionPressed("up"))
             {
+                // audioEngineIdle.Stop();
+                // audioEngineNormal.Play();
                 // up && canMoveForward
                 velocity = new Vector2(1, -1) * tileSize / 2;
                 Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
-                // start cooldown
                 movementCooldown.Start();
                 GetCurrentTile();
                 DrainBattery();
             }
             else if (Input.IsActionPressed("down"))
             {
+                // audioEngineIdle.Stop();
+                // audioEngineNormal.Play();
                 velocity = new Vector2(-1, 1) * tileSize / 2;
                 Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
-                // start cooldown
                 movementCooldown.Start();
                 GetCurrentTile();
                 DrainBattery();
@@ -112,7 +121,6 @@ public class Player : Area2D
                 }
             }
         }
-
         if (rotationDirection == 1)
         {
             roverDown.Visible = true;
@@ -139,13 +147,13 @@ public class Player : Area2D
         }
         // GD.Print("rotation direction = " + rotationDirection);
     }
+
     public override void _Process(float delta)
     {
         game.playerPosition = GlobalPosition;
         // GD.Print("player position = " + game.playerPosition);
         GetInput();
     }
-
 
     public void DrainBattery()
     {
@@ -165,7 +173,6 @@ public class Player : Area2D
         tile.used = true;
     }
 
-
     public void GetCurrentTile()
     {
         foreach (var node in game.tileDict)
@@ -174,6 +181,7 @@ public class Player : Area2D
             {
                 GD.Print("current tile key = " + node.Key);
                 GD.Print("current tile tag = " + node.Value.tag);
+
                 if (node.Value.tag == "item" && hasOptics == false && node.Value.used == false)
                 {
                     hasOptics = true;
@@ -219,7 +227,6 @@ public class Player : Area2D
                     }
                 }
             }
-
             else if (game.refPosition == node.Value.coord && node.Value.step == 0)
             {
                 if (node.Value.tag == "desert")
@@ -245,5 +252,22 @@ public class Player : Area2D
             }
         }
     }
+
+    // public void AnimationFinished(string which)
+    // {
+    //     if (which == "PressStart")
+    //     {
+    //         audioEngineIdle.Play();
+    //     }
+    // }
+
+    // public void _on_MovementCooldown_timeout()
+    // {
+    //     if (audioEngineNormal.Playing)
+    //     {
+    //         audioEngineNormal.Stop();
+    //     }
+    //     audioEngineIdle.Play();
+    // }
 }
 
