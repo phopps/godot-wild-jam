@@ -436,7 +436,7 @@ margin_bottom = 237.0
 theme = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 11 )
-text = "Game Programmer
+text = "Game Programmer, Sound Designer
 Patrick Hopps"
 align = 1
 

@@ -29,8 +29,8 @@ public class Player : Area2D
     // private AudioStreamPlayer audioEngineIdle;
     // private AudioStreamPlayer audioEngineNormal;
     // private AudioStreamPlayer audioEngineShutdown;
-    // private AudioStreamPlayer audioItemAttach;
-    // private AudioStreamPlayer audioEnergyRecharge;
+    private AudioStreamPlayer audioItemAttach;
+    private AudioStreamPlayer audioEnergyRecharge;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -38,8 +38,8 @@ public class Player : Area2D
         // audioEngineIdle = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineIdle");
         // audioEngineNormal = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineNormal");
         // audioEngineShutdown = GetNode<AudioStreamPlayer>("/root/Main/Audio/EngineShutdown");
-        // audioItemAttach = GetNode<AudioStreamPlayer>("/root/Main/Audio/ItemAttach");
-        // audioEnergyRecharge = GetNode<AudioStreamPlayer>("/root/Main/Audio/EnergyRecharge");
+        audioItemAttach = GetNode<AudioStreamPlayer>("/root/Main/Audio/ItemAttach");
+        audioEnergyRecharge = GetNode<AudioStreamPlayer>("/root/Main/Audio/EnergyRecharge");
         game = (GameManager)GetNode("/root/Main/Manager");
         HUD = (HUD)GetNode("/root/Main/Camera2D/HUD");
         roverUp = (AnimatedSprite)GetNode("RoverUp");
@@ -179,11 +179,12 @@ public class Player : Area2D
         {
             if (game.refPosition == node.Value.coord - new Vector2(1, 1) && node.Value.step == 1)
             {
-                GD.Print("current tile key = " + node.Key);
-                GD.Print("current tile tag = " + node.Value.tag);
+                // GD.Print("current tile key = " + node.Key);
+                // GD.Print("current tile tag = " + node.Value.tag);
 
                 if (node.Value.tag == "item" && hasOptics == false && node.Value.used == false)
                 {
+                    audioItemAttach.Play();
                     hasOptics = true;
                     optics.Visible = true;
                     opticsDown.Visible = true;
@@ -194,6 +195,7 @@ public class Player : Area2D
                 }
                 if (node.Value.tag == "item" && hasCharge == false)
                 {
+                    audioItemAttach.Play();
                     hasCharge = true;
                     charge.Visible = true;
                     chargeDown.Visible = true;
@@ -204,6 +206,7 @@ public class Player : Area2D
                 }
                 if (node.Value.tag == "item" && hasTemp == false)
                 {
+                    audioItemAttach.Play();
                     hasTemp = true;
                     temp.Visible = true;
                     tempDown.Visible = true;
@@ -215,6 +218,7 @@ public class Player : Area2D
                 }
                 if (node.Value.tag == "charge")
                 {
+                    audioEnergyRecharge.Play();
                     battery = battery += (maxBattery - battery);
                     if (battery >= maxBattery)
                     {

@@ -355,7 +355,7 @@ one_shot = true
 
 [node name="RoverUp" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Optics" type="AnimatedSprite" parent="RoverUp"]
@@ -368,31 +368,29 @@ playing = true
 [node name="Charge" type="AnimatedSprite" parent="RoverUp"]
 visible = false
 frames = SubResource( 13 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Audio" type="AnimatedSprite" parent="RoverUp"]
 visible = false
 frames = SubResource( 18 )
-frame = 2
 playing = true
 
 [node name="Solar" type="AnimatedSprite" parent="RoverUp"]
 visible = false
 frames = SubResource( 23 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Temp" type="AnimatedSprite" parent="RoverUp"]
 visible = false
 frames = SubResource( 28 )
-frame = 2
 playing = true
 
 [node name="OpticsUpgrade" type="AnimatedSprite" parent="RoverUp"]
 visible = false
 frames = SubResource( 33 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="RoverDown" type="AnimatedSprite" parent="."]
@@ -402,32 +400,27 @@ frames = SubResource( 38 )
 [node name="OpticsDown" type="AnimatedSprite" parent="RoverDown"]
 visible = false
 frames = SubResource( 43 )
-frame = 3
 speed_scale = 0.5
 playing = true
 
 [node name="SolarDown" type="AnimatedSprite" parent="RoverDown"]
 visible = false
 frames = SubResource( 48 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="ChargeDown" type="AnimatedSprite" parent="RoverDown"]
 visible = false
 frames = SubResource( 53 )
-frame = 2
 playing = true
 
 [node name="TempDown" type="AnimatedSprite" parent="RoverDown"]
 visible = false
 frames = SubResource( 58 )
-frame = 2
 playing = true
 
 [node name="AudioDown" type="AnimatedSprite" parent="RoverDown"]
 visible = false
 frames = SubResource( 63 )
-frame = 3
+frame = 1
 playing = true
-
-[connection signal="timeout" from="MovementCooldown" to="." method="_on_MovementCooldown_timeout"]
