@@ -61,59 +61,76 @@ speed = 0.1
 
 [node name="Credits" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 9 )
+volume_db = -10.0
 
 [node name="Level" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 21 )
+volume_db = -10.0
 
 [node name="MainMenu" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 10 )
+volume_db = -10.0
 
 [node name="WarningAlarm" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 11 )
+volume_db = -20.0
 
 [node name="LogTextEntry" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 16 )
+volume_db = -20.0
 
 [node name="MenuUp" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 22 )
-volume_db = -5.0
+volume_db = -20.0
 
 [node name="MenuDown" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 12 )
-volume_db = -5.0
+volume_db = -20.0
 
 [node name="BigSuccess" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 14 )
+volume_db = -20.0
 
 [node name="WallBump" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 15 )
+volume_db = -20.0
 
 [node name="ItemAttach" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 17 )
+volume_db = -20.0
 
 [node name="EnergyRecharge" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 18 )
+volume_db = -20.0
 
 [node name="IllegalMove" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 19 )
+volume_db = -20.0
 
 [node name="WarningUrgent" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 13 )
+volume_db = -20.0
 
 [node name="PowerDown" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 20 )
+volume_db = -20.0
 
 [node name="EngineFast" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 24 )
+volume_db = -20.0
 
 [node name="EngineIdle" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 27 )
+volume_db = -20.0
 
 [node name="EngineNormal" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 23 )
+volume_db = -20.0
 
 [node name="EngineRev" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 25 )
+volume_db = -20.0
 
 [node name="EngineShutdown" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 26 )
+volume_db = -20.0
