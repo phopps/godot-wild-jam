@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public class CameraController : Camera2D
 {

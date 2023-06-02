@@ -10,9 +10,13 @@ public class MainMenu : CanvasLayer
     private AnimationPlayer anim;
     private bool creditsVisible = false;
 
+    private AudioStreamPlayer audioMainMenu;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        audioMainMenu = GetNode<AudioStreamPlayer>("/root/Main/Audio/MainMenu");
+        audioMainMenu.Play();
         anim = GetNode<AnimationPlayer>("MainAnimator");
         anim.Play("Intro");
         anim.Queue("WaitingLoop");
@@ -46,6 +50,7 @@ public class MainMenu : CanvasLayer
         {
             // EmitSignal("IntroFinished");
             this.Hide();
+            audioMainMenu.Stop();
         }
     }
 
