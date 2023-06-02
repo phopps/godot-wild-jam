@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_coins_multiple_03-big_success.ogg-d38224deb0f8
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

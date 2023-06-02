@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_vehicle_01_engine_shutdown.ogg-f99d364ab1731d0
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

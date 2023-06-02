@@ -76,9 +76,11 @@ stream = ExtResource( 16 )
 
 [node name="MenuUp" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 22 )
+volume_db = -5.0
 
 [node name="MenuDown" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 12 )
+volume_db = -5.0
 
 [node name="BigSuccess" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource( 14 )

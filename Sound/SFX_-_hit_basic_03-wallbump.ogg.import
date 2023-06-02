@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_hit_basic_03-wallbump.ogg-40788b28843bf2061e25
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

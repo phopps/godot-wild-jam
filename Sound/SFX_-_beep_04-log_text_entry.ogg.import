@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_beep_04-log_text_entry.ogg-ddb0e6108ffe7d74249
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_beep_07-menu_down.ogg-e3b63353503a24691e2dd225
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_power_down_01.ogg-a4d8de1da677653c67497cd58468
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

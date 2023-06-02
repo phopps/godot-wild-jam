@@ -38,9 +38,14 @@ public class Player : Area2D
     float minBattery = 0;
     float maxBattery = 100;
 
+    // private AudioStreamPlayer audioLevel;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        // AudioStreamPlayer audioLevel = GetNode<AudioStreamPlayer>("/root/Main/Audio/Level");
+        // audioLevel.Play();
+
         game = (GameManager)GetNode("/root/Main/Manager");
         HUD = (HUD)GetNode("/root/Main/Camera2D/HUD");
 

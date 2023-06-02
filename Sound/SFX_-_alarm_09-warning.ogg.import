@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_alarm_09-warning.ogg-0475ee29a549f0dcbf2dc1e19
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

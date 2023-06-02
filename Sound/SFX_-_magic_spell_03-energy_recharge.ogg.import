@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_magic_spell_03-energy_recharge.ogg-7d7046e19cb
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

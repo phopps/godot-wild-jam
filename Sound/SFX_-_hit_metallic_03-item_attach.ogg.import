@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_hit_metallic_03-item_attach.ogg-d37e6c9d2b9ec8
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/SFX_-_negative_04-illegal_move.ogg-ed3bd6f0c182119cb
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
