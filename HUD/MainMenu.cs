@@ -6,6 +6,7 @@ public class MainMenu : CanvasLayer
     private AnimationPlayer anim;
     private bool creditsVisible = false;
     private AudioStreamPlayer audioMainMenu;
+    private AudioStreamPlayer audioCredits;
     private AudioStreamPlayer audioLevel;
     private AudioStreamPlayer audioMenuUp;
     private AudioStreamPlayer audioMenuDown;
@@ -15,6 +16,7 @@ public class MainMenu : CanvasLayer
     public override void _Ready()
     {
         audioMainMenu = GetNode<AudioStreamPlayer>("/root/Main/Audio/MainMenu");
+        audioCredits = GetNode<AudioStreamPlayer>("/root/Main/Audio/Credits");
         audioLevel = GetNode<AudioStreamPlayer>("/root/Main/Audio/Level");
         audioMenuUp = GetNode<AudioStreamPlayer>("/root/Main/Audio/MenuUp");
         audioMenuDown = GetNode<AudioStreamPlayer>("/root/Main/Audio/MenuDown");
@@ -36,6 +38,8 @@ public class MainMenu : CanvasLayer
         if (creditsVisible)
         {
             audioMenuUp.Play();
+            audioCredits.Stop();
+            audioMainMenu.Play();
             GetNode<ColorRect>("Credits").Hide();
             // GetNode<ColorRect>("Credits").SetModulate(new Color(1,1,1,0));
             creditsVisible = false;
@@ -43,6 +47,8 @@ public class MainMenu : CanvasLayer
         else
         {
             audioMenuDown.Play();
+            audioMainMenu.Stop();
+            audioCredits.Play();
             GetNode<ColorRect>("Credits").Show();
             // GetNode<ColorRect>("Credits").SetModulate(new Color(1,1,1,1));
             creditsVisible = true;
