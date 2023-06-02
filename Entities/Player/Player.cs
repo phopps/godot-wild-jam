@@ -1,43 +1,31 @@
-using System;
 using Godot;
 
 public class Player : Area2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
     [Export] public int speed = 100;
     public Vector2 velocity = new Vector2();
     public Vector2 tileSize = new Vector2(32, 16);
     public int rotationDirection = 0;
     private Timer movementCooldown;
     GameManager game;
-
     TileMap sceneryMap;
-
     AnimatedSprite roverUp;
     AnimatedSprite roverDown;
-
     AnimatedSprite optics;
     AnimatedSprite charge;
     AnimatedSprite temp;
     AnimatedSprite opticsDown;
     AnimatedSprite chargeDown;
     AnimatedSprite tempDown;
-
     HUD HUD;
-
     bool hasOptics = false;
     bool hasTemp = false;
     bool hasCharge = false;
-
-
     float heat = 50;
     float maxHeat = 100;
     float battery = 100;
     float minBattery = 0;
     float maxBattery = 100;
-
     // private AudioStreamPlayer audioLevel;
 
     // Called when the node enters the scene tree for the first time.
@@ -45,26 +33,19 @@ public class Player : Area2D
     {
         // AudioStreamPlayer audioLevel = GetNode<AudioStreamPlayer>("/root/Main/Audio/Level");
         // audioLevel.Play();
-
         game = (GameManager)GetNode("/root/Main/Manager");
         HUD = (HUD)GetNode("/root/Main/Camera2D/HUD");
-
         roverUp = (AnimatedSprite)GetNode("RoverUp");
         roverDown = (AnimatedSprite)GetNode("RoverDown");
-
         optics = (AnimatedSprite)GetNode("RoverUp/Optics");
         opticsDown = (AnimatedSprite)GetNode("RoverDown/OpticsDown");
         charge = (AnimatedSprite)GetNode("RoverUp/Charge");
         chargeDown = (AnimatedSprite)GetNode("RoverDown/ChargeDown");
         temp = (AnimatedSprite)GetNode("RoverUp/Temp");
         tempDown = (AnimatedSprite)GetNode("RoverDown/TempDown");
-
         sceneryMap = (TileMap)GetNode("/root/Main/WorldSpace/Node2D/ParentMap/Scenery");
-
-
         Position = new Vector2(16, 0);
         movementCooldown = GetNode<Timer>("MovementCooldown");
-
     }
 
     public void GetInput()
@@ -73,9 +54,9 @@ public class Player : Area2D
         if (movementCooldown.IsStopped())
         {
             velocity = new Vector2(); // (0, 0)
-                                      // up && canMoveForward
             if (Input.IsActionPressed("up"))
             {
+                // up && canMoveForward
                 velocity = new Vector2(1, -1) * tileSize / 2;
                 Position += velocity.Rotated(rotationDirection).Snapped(tileSize / 2);
                 // start cooldown
@@ -102,7 +83,6 @@ public class Player : Area2D
             if (rotationDirection == 4)
             {
                 rotationDirection -= 1;
-
             }
             else if (rotationDirection == 3)
             {
@@ -122,7 +102,6 @@ public class Player : Area2D
             if (rotationDirection == 1)
             {
                 rotationDirection += 2;
-
             }
             else
             {
@@ -263,11 +242,8 @@ public class Player : Area2D
                         HUD.UpdateHeat(heat);
                     }
                 }
-
             }
         }
     }
-
-
 }
 

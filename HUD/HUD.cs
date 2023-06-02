@@ -1,16 +1,13 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
 public class HUD : CanvasLayer
 {
-    // [Signal]
-    // public delegate void UpdateHud();
-
+    // [Signal] public delegate void UpdateHud();
     private Timer typewriter_tm;
     private Timer message_tm;
     private Queue<int> display_q = new Queue<int>();
-    private String cur_msg;
+    private string cur_msg;
     private int cur_msg_char;
     private ColorRect partList;
     private ColorRect sLog_bg;
@@ -20,7 +17,6 @@ public class HUD : CanvasLayer
     private AnimationPlayer anim;
     private bool isTyping = false;
     private float gameTimer = 0;
-
     private ScrollContainer scr;
     private VScrollBar v;
     private double maxScroll;
@@ -105,7 +101,7 @@ public class HUD : CanvasLayer
         }
     }
 
-    public String GetTimestamp(bool fake = false)
+    public string GetTimestamp(bool fake = false)
     {
         if (fake)
         {
@@ -119,7 +115,7 @@ public class HUD : CanvasLayer
         }
     }
 
-    private String[] allLogs = {
+    private string[] allLogs = {
     "System Activation.",
     "Critical system damage detected.",
     "Auto-repair functionality enabled [n] cycles ago.",
@@ -151,10 +147,10 @@ public class HUD : CanvasLayer
     "Audio Sensor acquired. Please begin calibrations."//28
   };
 
-    public String GetLog(int id)
+    public string GetLog(int id)
     {
         //given an id, return the appropriate string.
-        String log = allLogs[id];
+        string log = allLogs[id];
 
         if (log != null)
         {
@@ -201,7 +197,7 @@ public class HUD : CanvasLayer
         battery.Value = val;
     }
 
-    public void GetPart(String name)
+    public void GetPart(string name)
     {
         if (!partList.Visible)
         {
@@ -256,5 +252,4 @@ public class HUD : CanvasLayer
         DisplayLog(17);
         DisplayLog(18);
     }
-
 }

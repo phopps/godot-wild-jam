@@ -1,15 +1,10 @@
-using System;
 using Godot;
 
 public class MainMenu : CanvasLayer
 {
-
-    // [Signal]
-    // public delegate void IntroFinished();
-
+    // [Signal] public delegate void IntroFinished();
     private AnimationPlayer anim;
     private bool creditsVisible = false;
-
     private AudioStreamPlayer audioMainMenu;
     private AudioStreamPlayer audioLevel;
     private AudioStreamPlayer audioMenuUp;
@@ -52,16 +47,16 @@ public class MainMenu : CanvasLayer
         }
     }
 
-    public void AnimationFinished(String which)
+    public void AnimationFinished(string which)
     {
         // GD.Print("animation finished.");
         if (which == "PressStart")
         {
             // EmitSignal("IntroFinished");
-            this.Hide();
+            // this.Hide();
+            Hide();
             audioMainMenu.Stop();
             audioLevel.Play();
         }
     }
-
 }

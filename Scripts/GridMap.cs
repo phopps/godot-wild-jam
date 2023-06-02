@@ -3,31 +3,17 @@ using Godot;
 
 public class GridMap : TileMap
 {
-    /*
-
-	TILEMAP EXTENSION DESIGNED TO USE TILE VALUES
-
-	- burcarz
-
-	*/
-
+    /* TILEMAP EXTENSION DESIGNED TO USE TILE VALUES - burcarz */
     public Godot.Collections.Array cells;
     GameManager game;
-
     TileMap groundMap;
     TileMap sceneryMap;
-
     TileDictionary<Tile.TileData> tileDict = new TileDictionary<Tile.TileData>();
-
-    [Export]
-    public Vector2 cellSize;
+    [Export] public Vector2 cellSize;
     public Vector2 cellHalf;
-    [Export]
-    public Vector2 size;
-
+    [Export] public Vector2 size;
     public Vector2 cellSelected;
     public Vector2 cellPosition;
-
     int k;
 
     public enum tags
@@ -42,53 +28,42 @@ public class GridMap : TileMap
         empty
     }
 
-    [Export]
-    public int visionRange;
+    [Export] public int visionRange;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         // tags = ["grass", "desert", "tundra", "charge", "rubble", "water"];
-
         cellHalf = cellSize / 2;
         game = (GameManager)GetNode("/root/Main/Manager");
-
         groundMap = (TileMap)GetNode("Ground");
         sceneryMap = (TileMap)GetNode("Scenery");
-
-        // k is the tile key
-        k = 0;
+        k = 0; // k is the tile key
         int e;
         e = 0;
-        GD.Print(e);
+        // GD.Print(e);
         FillDictionary(groundMap, e);
         e = 1;
-        GD.Print(e);
+        // GD.Print(e);
         FillDictionary(sceneryMap, e);
-
         game.tileDict = tileDict;
         game.visionRange = visionRange;
     }
 
-
     public void FillDictionary(TileMap map, int elevation)
     {
         cells = map.GetUsedCells();
-
         int i;
 
         foreach (var c in cells)
         {
             Vector2 cellData;
             cellData = (Vector2)c;
-            // i is index of the tile
-            i = map.GetCellv(cellData);
-
+            i = map.GetCellv(cellData); // i is index of the tile
             string name = map.TileSet.TileGetName(i);
             int temp;
             string tag;
             bool traversable;
-
             tag = GetTileType(name);
             temp = GetTemp(tag);
             traversable = true;
@@ -107,7 +82,6 @@ public class GridMap : TileMap
             k++;
         }
     }
-
 
     /*
 	absolutely disgusting garbage if else bullshit can't think of a better way to check this
@@ -154,8 +128,7 @@ public class GridMap : TileMap
         return tag;
     }
 
-    // returns the tempeture of the tile based on its tag
-
+    // returns the temperature of the tile based on its tag
     public int GetTemp(string tag)
     {
         int temp = 0;
@@ -170,10 +143,7 @@ public class GridMap : TileMap
         return temp;
     }
 
-    /*
-	THIS METHOD DRAWS A CIRCLE AROUND THE PLAYER WITH TILES IN THEIR VISION RANGE
-	*/
-
+    /* THIS METHOD DRAWS A CIRCLE AROUND THE PLAYER WITH TILES IN THEIR VISION RANGE */
     public bool InCircle(Vector2 player, Vector2 tile)
     {
         float dx = player.x - tile.x;
@@ -188,7 +158,6 @@ public class GridMap : TileMap
         UnSetTiles(cellSelected);
         SetTiles(cellSelected);
         SetZIndex(cellSelected);
-
         game.tileDict = tileDict;
         game.refPosition = cellSelected;
         visionRange = game.visionRange;
@@ -209,22 +178,16 @@ public class GridMap : TileMap
         }
     }
 
-    /*
-	CONVERTS THE TILES VECTOR TO INT FOR SETTING INDEX WHEN SETTING TILES
-	*/
-
+    /* CONVERTS THE TILES VECTOR TO INT FOR SETTING INDEX WHEN SETTING TILES */
     public int GetTileIndex(Vector2 tile)
     {
         int index = GetCellv(tile);
-
         return index;
     }
 
     public void UnSetTiles(Vector2 refPosition)
     {
-        /*
-			UNSET TILES OUTSIDE OF X/Y VIEW RANGE
-		*/
+        /* UNSET TILES OUTSIDE OF X/Y VIEW RANGE */
         foreach (var node in tileDict)
         {
             if (node.Value.used == true)
@@ -241,9 +204,7 @@ public class GridMap : TileMap
 
     public void SetTiles(Vector2 refPosition)
     {
-        /*
-			SET TILES INSDE X/Y VIEW RANGE
-		*/
+        /* SET TILES INSDE X/Y VIEW RANGE */
         foreach (var node in tileDict)
         {
             if (InCircle(refPosition, node.Value.coord) == true)
@@ -252,12 +213,10 @@ public class GridMap : TileMap
                 {
                     groundMap.SetCellv(node.Value.coord, node.Value.index);
                 }
-
                 else if (node.Value.step == 1 && node.Value.used == false)
                 {
                     sceneryMap.SetCellv(node.Value.coord, node.Value.index);
                 }
-
 
                 if (game.green == true)
                 {
@@ -275,7 +234,6 @@ public class GridMap : TileMap
                 {
                     SetVioletTiles(node.Value);
                 }
-
             }
         }
     }
@@ -344,7 +302,6 @@ public class GridMap : TileMap
             {
                 groundMap.SetCellv(tile.coord, tile.index);
             }
-
             else if (tile.step == 1)
             {
                 sceneryMap.SetCellv(tile.coord, tile.index);
@@ -368,7 +325,6 @@ public class GridMap : TileMap
             {
                 groundMap.SetCellv(tile.coord, tile.index);
             }
-
             else if (tile.step == 1)
             {
                 sceneryMap.SetCellv(tile.coord, tile.index);
@@ -380,34 +336,24 @@ public class GridMap : TileMap
     {
         return gridPosition * cellSize + cellHalf;
     }
-    /*
 
-	returns the coordinates of a cell on the grid
-
-	*/
+    /* returns the coordinates of a cell on the grid */
     public Vector2 CalculateGridCoordinates(Vector2 mapPosition)
     {
         Vector2 gridCoordinates = (mapPosition / cellSize);
-
         // may need to use MATH FLOOR HERE
         // return new Vector2(Mathf.Floor(gridCoordinates.x), Mathf.Floor(gridCoordinates.y));
         return gridCoordinates;
     }
-    /*
 
-	returns the x y coordinates to make sure the cell is in bounds of the grid
-
-	*/
+    /* returns the x y coordinates to make sure the cell is in bounds of the grid */
     public bool IsInBounds(Vector2 cellCoordinates)
     {
         bool outOfBounds = cellCoordinates.x >= 0 && cellCoordinates.x < size.x;
         return outOfBounds && cellCoordinates.y >= 0 && cellCoordinates.y < size.y;
     }
-    /*
 
-	clamp function returns x and y values smaller than the size of the grid
-
-	*/
+    /* clamp function returns x and y values smaller than the size of the grid */
     public Vector2 GridClamp(Vector2 gridPosition)
     {
         Vector2 newGridPosition = gridPosition;

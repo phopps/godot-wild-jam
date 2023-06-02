@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class TileDictionary<TileData> : System.Collections.Generic.Dictionary<int, Tile.TileData>
@@ -32,5 +31,3 @@ public class Tile : Node2D
         public bool traversable;
     }
 }
-
-

@@ -1,9 +1,7 @@
-using System;
 using Godot;
 
 public class tileDemo : Node2D
 {
-
     private TileMap map;
 
     // Called when the node enters the scene tree for the first time.
@@ -33,5 +31,4 @@ public class tileDemo : Node2D
             map.SetCell(x, y, 2);
         }
     }
-
 }

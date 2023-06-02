@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class Generation : TileMap
@@ -8,7 +7,6 @@ public class Generation : TileMap
     float width;
     float height;
     private Vector2[] dirs;
-
 
     private Vector2 GetRandXY()
     {
@@ -28,10 +26,8 @@ public class Generation : TileMap
     {
         int maxCycle = 1000;
         int cycle = 0;
-
         width = mapSize / cellSize.x;
         height = mapSize / cellSize.y;
-
         Vector2 w = Vector2.Zero;
 
         while (cycle <= maxCycle)
@@ -61,7 +57,6 @@ public class Generation : TileMap
             }
         }
     }
-
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
